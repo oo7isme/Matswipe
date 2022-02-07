@@ -1,11 +1,5 @@
 'use strict';
 
-console.log(document.cookie)
-
-if (document.cookie == null || document.cookie == '') {
-  window.open('PAGES/login.html', "_self");
-}
-
 var matswipeContainer = document.querySelector('.matswipe');
 var allCards = document.querySelectorAll('.matswipe--card');
 var nope = document.getElementById('nope');
