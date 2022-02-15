@@ -1,7 +1,7 @@
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
     authDomain: "matswipe-30b10.firebaseapp.com",
-    databaseURL: "https://matswipe-30b10-default-rtdb.europe-west1.firebasedatabase.app/",
+    databaseURL: "https://matswipe-30b10-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "matswipe-30b10",
     storageBucket: "matswipe-30b10.appspot.com",
     messagingSenderId: "793866100966",
@@ -37,7 +37,16 @@ signUpButton.addEventListener("click", (e) => {
     location.reload();
     // Signed in 
     var user = userCredential.user;
-    console.log(user.uid)
+    
+    function createDBInstance() {
+      firebase.database().ref('like/' + user.uid).set({
+        001: true,
+        002: false
+      });
+    }
+
+    createDBInstance()
+
     })
     .catch((error) => {
     var errorCode = error.code;
