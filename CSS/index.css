@@ -10,10 +10,9 @@
     font-family: sans-serif;
   }
   
-  h1 {
+  #headerpic {
     margin-top: 20%;
-    color: black;
-    font-size: 3rem;
+    width: 40%;
   }
 
   .matswipe {

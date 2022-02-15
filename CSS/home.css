@@ -10,6 +10,13 @@ body {
   font-family: sans-serif;
 }
 
+.logo img {
+  float: right;
+  width: 20%;
+  margin-right: 2%;
+  margin-top: -2.5%;
+}
+
 .matswipe {
   width: 100vw;
   height: 93vh;
