@@ -4,6 +4,7 @@
 var firebaseConfig = {
   apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
   authDomain: "matswipe-30b10.firebaseapp.com",
+  databaseURL: "https://matswipe-30b10-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "matswipe-30b10",
   storageBucket: "matswipe-30b10.appspot.com",
   messagingSenderId: "793866100966",
@@ -14,6 +15,25 @@ const auth = firebase.auth()
 //Lifecycle hooks
 auth.onAuthStateChanged(function(user) {
   if (user) {
+    // var user = userCredential.user;
+    
+    import { getDatabase, ref, set } from "firebase/database";
+
+    const writeUserData = async () => {
+      try {
+        const db = getDatabase();
+        const nodeRef = ref(db, 'like/' + "kasldfksdovpk");
+        const theData = {
+          001: true,
+          002: false
+        };
+        await set(nodeRef, theData);
+        console.log('Successfully set data!');
+      } catch (ex) {
+        console.error(`UGH!!! ${ex.message}`);
+      }
+    };
+    writeUserData();
 
   } else {
       if (window.location != 'index.html') {
@@ -21,6 +41,7 @@ auth.onAuthStateChanged(function(user) {
       }
   }
 })
+
 
 var matswipeContainer = document.querySelector('.matswipe');
 var allCards = document.querySelectorAll('.matswipe--card');

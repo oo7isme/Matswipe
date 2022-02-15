@@ -8,8 +8,14 @@ var firebaseConfig = {
     appId: "1:793866100966:web:33a6372fbd36de69649b27"
 };
 
+import {initializeApp} from 'firebase/app';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
+
 //Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
+
+initializeApp(firebaseConfig);
 
 const auth = firebase.auth()
 
@@ -37,15 +43,6 @@ signUpButton.addEventListener("click", (e) => {
     location.reload();
     // Signed in 
     var user = userCredential.user;
-    
-    function createDBInstance() {
-      firebase.database().ref('like/' + user.uid).set({
-        001: true,
-        002: false
-      });
-    }
-
-    createDBInstance()
 
     })
     .catch((error) => {
