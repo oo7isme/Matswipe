@@ -3,50 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <!-- Font Awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-<!-- Google Fonts -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-<!-- Bootstrap core CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-<!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 <link rel="stylesheet" href="CSS/index.css" />
   <title>MatSwipe - Login</title>
-</head>
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
 <body>
   
-<form>
-  <h3 class="text-center">Registration / Login Form</h3>
-  <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="email" id="inputEmail" class="form-control" />
-    <label class="form-label" for="form2Example1">Email address</label>
-  </div>
-
-  <!-- Password input -->
-  <div class="form-outline mb-2">
-    <input type="password" id="inputPassword" class="form-control" />
-    <label class="form-label" for="form2Example2">Password</label>
-  </div>
-
-  <!-- 2 column grid layout for inline styling -->
-  <div class="row mb-4">
-    <div class="col d-flex justify-content-center">
-    
-    </div>
-  </div>
-
-  <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4" id="signin">Sign in</button>
-  <button type="submit" class="btn btn-primary btn-block mb-4" id="signup">Sign Up</button>
-  </div>
-</form>
-
-<h4 id="user">Welcome user: </h4>
-
-   <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-   <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+  <div class="matswipe">
+    <h1>MatSwipe</h1>
+    <div class="login-box">
+        <div class="form">
+            <form class="register-form">
+                <p id="login-title">Ny konto</p>
+                <input id="inputEmail" type="email" class="form-control" placeholder="Epost"/>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Passord"/>
+                <button type="submit" id="signup">Opprett konto</button>
+                <p class="message">Har allerede en konto?<a href="#"> Logg inn</a></p>
+              </form>
+                <form class="login-form">
+                    <p id="login-title">Logg inn</p>
+                    <input type="text" id="inputEmail1" placeholder="Epost"/>
+                    <input type="password" id="inputPassword1" placeholder="Passord"/>
+                    <button type="submit"  id="signin">Logg inn</button>
+                    <p class="message">Har ikke bruker?<a href="#"> Ny konto</a></p>
+                </form>
+        </div>
+      </div>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
   <script src="JS/index.js"></script>
-</body>
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6dddabd5dd740b06',m:'KSl5.nYnncgmcI7Ih_L.1IoHgENHyPpU3lf_ij5OVdw-1644919038-0-AWA6CEPphLghKw31bmRkMpSpC4MrFhts5B050Incc8W+7hQ7Ltmd8yXEiWFUvYFNKak35RtmueHVbO1xRyPJJHVmRnFpMXRcGt2WyXZFPNHJJ3IpjFExvtPRap/KIx94QdEmOH9HSqkV0Bpws7hLzeSm+Sqs6GULqD9MC9g7vK4idFhGpTf1YWjeCLjdR21gtQ==',s:[0x88b604c3e9,0xf4794f6806],}})();</script></body>
 </html>

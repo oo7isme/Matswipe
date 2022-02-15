@@ -1,5 +1,32 @@
 'use strict';
 
+//Initialize Firebase
+var firebaseConfig = {
+  apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
+  authDomain: "matswipe-30b10.firebaseapp.com",
+  projectId: "matswipe-30b10",
+  storageBucket: "matswipe-30b10.appspot.com",
+  messagingSenderId: "793866100966",
+  appId: "1:793866100966:web:33a6372fbd36de69649b27"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth()
+//Lifecycle hooks
+auth.onAuthStateChanged(function(user) {
+  if (user) {
+
+    var email = user.email
+  
+    var users = document.getElementById("user")
+    var text = document.createTextNode(email);
+
+  } else {
+      if (window.location != 'index.html') {
+        window.location = "../index.html";
+      }
+  }
+})
+
 var matswipeContainer = document.querySelector('.matswipe');
 var allCards = document.querySelectorAll('.matswipe--card');
 var nope = document.getElementById('nope');
@@ -76,7 +103,7 @@ allCards.forEach(function (el) {
 });
 
 function favListener() {
-  window.open('PAGES/fav.html', "_self")
+  window.open('fav.html', "_self")
 }
 
 fav.addEventListener('click', favListener);

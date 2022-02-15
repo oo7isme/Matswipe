@@ -12,26 +12,20 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth()
 
-function signOut() {
-    let signOutButton = document.getElementById("signout")
-    signOutButton.addEventListener("click", (e) => {
-    //Prevent Default Form Submission Behavior
-    e.preventDefault()
-    console.log("clicked")
-    
-    auth.signOut()
-    alert("Signed Out")
-    window.location = "../index.html";
+//Lifecycle hooks
+auth.onAuthStateChanged(function(user) {
+  if (user) {
+    window.location = "PAGES/home.html";
+  } else {
+    //no user signed in
+  }
 })
-}
 
-
-//Signup Function
+// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION
 let signUpButton = document.getElementById('signup')
 signUpButton.addEventListener("click", (e) => {
     //Prevent Default Form Submission Behavior
     e.preventDefault()
-    console.log("clicked")
 
     var email = document.getElementById("inputEmail")
     var password = document.getElementById("inputPassword")
@@ -41,7 +35,6 @@ signUpButton.addEventListener("click", (e) => {
     location.reload();
     // Signed in 
     var user = userCredential.user;
-    console.log("user",user.email)
     })
     .catch((error) => {
     var errorCode = error.code;
@@ -52,27 +45,19 @@ signUpButton.addEventListener("click", (e) => {
 })
 
 
-
-
-
-
-
-
+// SIGN IN FUNCTION// SIGN IN FUNCTION// SIGN IN FUNCTION// SIGN IN FUNCTION
 let signInButton = document.getElementById('signin')
 signInButton.addEventListener("click", (e) => {
 //Prevent Default Form Submission Behavior
 e.preventDefault()
-console.log("clicked")
 
-var email = document.getElementById("inputEmail")
-var password = document.getElementById("inputPassword")
-
+var email = document.getElementById("inputEmail1")
+var password = document.getElementById("inputPassword1")
 auth.signInWithEmailAndPassword(email.value, password.value) 
 .then((userCredential) => {
     // location.reload();
     // Signed in 
     var user = userCredential.user;
-    console.log("user",user.email)
     window.location = "PAGES/home.html";
     })
     .catch((error) => {
@@ -83,29 +68,6 @@ auth.signInWithEmailAndPassword(email.value, password.value)
     });
 })
 
-
-
-//This method gets invoked in the UI when there are changes in the authentication state:
-// 1). Right after the listener has been registered
-// 2). When a user is signed in
-// 3). When the current user is signed out
-// 4). When the current user changes
-
-//Lifecycle hooks
-auth.onAuthStateChanged(function(user) {
-  if (user) {
-
-    var email = user.email
-  
-    var users = document.getElementById("user")
-    var text = document.createTextNode(email);
-
-    users.appendChild(text);
-
-    console.log(users)
-
-    window.location = "PAGES/home.html";
-  } else {
-    //no user signed in
-  }
-})
+$('.message a').click(function(){
+  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
