@@ -1,7 +1,7 @@
 var back = document.getElementById('back');
 
 function backListener() {
-    location.replace("../index.html")
-  }
+    window.history.back()
+  } 
   
 back.addEventListener('click', backListener);
