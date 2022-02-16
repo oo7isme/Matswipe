@@ -1,3 +1,5 @@
+document.getElementById("matswipemaincon").style.display = "none";
+document.getElementById("loader").style.display = "block";
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
 import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
@@ -18,6 +20,8 @@ onAuthStateChanged(auth, function(user) {
     if (user) {
         window.location = "PAGES/home.html";
     } else {
+        document.getElementById("matswipemaincon").style.display = "flex";
+        document.getElementById("loader").style.display = "none";
         //no user signed in
     }
 })
