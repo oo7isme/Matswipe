@@ -1,3 +1,7 @@
+import {initializeApp} from 'firebase/app';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+// import { getDatabase, ref, set } from 'firebase/database';
+
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
     authDomain: "matswipe-30b10.firebaseapp.com",
@@ -7,10 +11,6 @@ var firebaseConfig = {
     messagingSenderId: "793866100966",
     appId: "1:793866100966:web:33a6372fbd36de69649b27"
 };
-
-import {initializeApp} from 'firebase/app';
-import {getAuth, onAuthStateChanged} from 'firebase/auth';
-// import { getDatabase, ref, set } from 'firebase/database';
 
 //Initialize Firebase
 // firebase.initializeApp(firebaseConfig);
