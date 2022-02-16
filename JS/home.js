@@ -1,26 +1,23 @@
-import {initializeApp} from 'firebase/app';
-import { getDatabase, ref, set } from 'firebase/database';
-// import {getAuth, onAuthStateChanged} from 'firebase/auth';
-
-'use strict';
-
-//Initialize Firebase
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
+import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
 var firebaseConfig = {
   apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
   authDomain: "matswipe-30b10.firebaseapp.com",
-  databaseURL: "https://matswipe-30b10-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "matswipe-30b10",
   storageBucket: "matswipe-30b10.appspot.com",
   messagingSenderId: "793866100966",
   appId: "1:793866100966:web:33a6372fbd36de69649b27"
 };
+let app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-//Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
 
-initializeApp(firebaseConfig);
-
-const auth = firebase.auth()
 
 auth.onAuthStateChanged(function(user) {
   if (user) {
@@ -31,8 +28,8 @@ auth.onAuthStateChanged(function(user) {
         const db = getDatabase();
         const nodeRef = ref(db, 'like/' + "kasldfksdovpk");
         const theData = {
-          001: true,
-          002: false
+          "001": "true",
+          "002": "false"
         };
         await set(nodeRef, theData);
         console.log('Successfully set data!');

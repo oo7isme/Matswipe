@@ -6,24 +6,19 @@ import {
   onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
 import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
-
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
     authDomain: "matswipe-30b10.firebaseapp.com",
-    databaseURL: "https://matswipe-30b10-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "matswipe-30b10",
     storageBucket: "matswipe-30b10.appspot.com",
     messagingSenderId: "793866100966",
     appId: "1:793866100966:web:33a6372fbd36de69649b27"
 };
+let app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-//Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
 
-initializeApp(firebaseConfig);
-
-//Lifecycle hooks
-onAuthStateChanged(function(user) {
+onAuthStateChanged(auth, function(user) {
   if (user) {
     var uid = user.uid;
     window.location = "PAGES/home.html";
@@ -31,6 +26,7 @@ onAuthStateChanged(function(user) {
     //no user signed in
   }
 })
+
 
 // SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION// SIGN UP FUNCTION
 let signUpButton = document.getElementById('signup')
@@ -41,7 +37,7 @@ signUpButton.addEventListener("click", (e) => {
     var email = document.getElementById("inputEmail")
     var password = document.getElementById("inputPassword")
         
-    getAuth.createUserWithEmailAndPassword(email.value, password.value)
+    createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
     location.reload();
     // Signed in 
@@ -65,7 +61,7 @@ e.preventDefault()
 
 var email = document.getElementById("inputEmail1")
 var password = document.getElementById("inputPassword1")
-getAuth.signInWithEmailAndPassword(email.value, password.value) 
+signInWithEmailAndPassword(auth, email.value, password.value) 
 .then((userCredential) => {
     // location.reload();
     // Signed in 
