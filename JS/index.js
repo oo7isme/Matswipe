@@ -10,17 +10,15 @@ var firebaseConfig = {
 
 import {initializeApp} from 'firebase/app';
 import {getAuth, onAuthStateChanged} from 'firebase/auth';
-import { getDatabase, ref, set } from 'firebase/database';
+// import { getDatabase, ref, set } from 'firebase/database';
 
 //Initialize Firebase
 // firebase.initializeApp(firebaseConfig);
 
 initializeApp(firebaseConfig);
 
-const auth = firebase.auth()
-
 //Lifecycle hooks
-auth.onAuthStateChanged(function(user) {
+onAuthStateChanged(function(user) {
   if (user) {
     var uid = user.uid;
     window.location = "PAGES/home.html";
@@ -38,7 +36,7 @@ signUpButton.addEventListener("click", (e) => {
     var email = document.getElementById("inputEmail")
     var password = document.getElementById("inputPassword")
         
-    auth.createUserWithEmailAndPassword(email.value, password.value)
+    getAuth.createUserWithEmailAndPassword(email.value, password.value)
     .then((userCredential) => {
     location.reload();
     // Signed in 
@@ -62,7 +60,7 @@ e.preventDefault()
 
 var email = document.getElementById("inputEmail1")
 var password = document.getElementById("inputPassword1")
-auth.signInWithEmailAndPassword(email.value, password.value) 
+getAuth.signInWithEmailAndPassword(email.value, password.value) 
 .then((userCredential) => {
     // location.reload();
     // Signed in 

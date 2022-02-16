@@ -10,14 +10,21 @@ var firebaseConfig = {
   messagingSenderId: "793866100966",
   appId: "1:793866100966:web:33a6372fbd36de69649b27"
 };
-firebase.initializeApp(firebaseConfig);
+
+import {initializeApp} from 'firebase/app';
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
+
+//Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+
+initializeApp(firebaseConfig);
+
 const auth = firebase.auth()
-//Lifecycle hooks
+
 auth.onAuthStateChanged(function(user) {
   if (user) {
     // var user = userCredential.user;
-    
-    import { getDatabase, ref, set } from "firebase/database";
 
     const writeUserData = async () => {
       try {
