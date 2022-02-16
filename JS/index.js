@@ -1,6 +1,11 @@
-import {initializeApp} from 'firebase/app';
-import {getAuth, onAuthStateChanged} from 'firebase/auth';
-// import { getDatabase, ref, set } from 'firebase/database';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
+import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
 
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",

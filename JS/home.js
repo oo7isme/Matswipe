@@ -1,6 +1,6 @@
 import {initializeApp} from 'firebase/app';
-// import {getAuth, onAuthStateChanged} from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
+// import {getAuth, onAuthStateChanged} from 'firebase/auth';
 
 'use strict';
 
