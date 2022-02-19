@@ -18,7 +18,7 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, function(user) {
     if (user) {
-        window.location = "PAGES/home.html";
+        // window.location = "PAGES/home.html";
     } else {
         document.getElementById("matswipemaincon").style.display = "flex";
         document.getElementById("loader").style.display = "none";
@@ -37,15 +37,14 @@ signUpButton.addEventListener("click", (e) => {
     var password = document.getElementById("inputPassword")
 
     createUserWithEmailAndPassword(auth, email.value, password.value)
-        .then((userCredential) => {
+        .then((user) => {
             // Signed in
             // const writeUserData = async() => {
             //     try {
             //         const db = getDatabase();
-            //         const nodeRef = ref(db, 'like/' + userCredential.uid);
+            //         const nodeRef = ref(db, 'like/' + user.uid);
             //         const theData = {
-            //             "001": "true",
-            //             "002": "false"
+            //             "001": "null"
             //         };
             //         await set(nodeRef, theData);
             //     } catch (ex) {
@@ -53,7 +52,6 @@ signUpButton.addEventListener("click", (e) => {
             //     }
             // };
             // writeUserData();
-
         })
         .catch((error) => {
             var errorCode = error.code;
