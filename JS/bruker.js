@@ -12,6 +12,7 @@ var firebaseConfig = {
 };
 let app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const user = auth.currentUser;
 onAuthStateChanged(auth, function(user) {
     if (user) {
         var email = user.email;
@@ -27,10 +28,7 @@ let signOutButton = document.getElementById("signout")
 signOutButton.addEventListener("click", (e) => {
     //Prevent Default Form Submission Behavior
     e.preventDefault()
-    auth.signOut().then(() => {
-        alert("Signed Out")
-    })
-
+    auth.signOut()
 })
 
 const popup = document.getElementById("popup")
@@ -39,13 +37,11 @@ const popup = document.getElementById("popup")
 let resetButton = document.getElementById('reset')
 resetButton.addEventListener("click", (e) => {
     e.preventDefault()
-    var email = document.getElementById("epost").innerHTML;
-    sendPasswordResetEmail(email)
+    var email = auth.currentUser.email;
+    sendPasswordResetEmail(auth, email)
         .then(() => {
             console.log("Password reset email sent!")
             popup.style.display = "flex";
-
-
         })
         .catch((error) => {
             var errorCode = error.code;

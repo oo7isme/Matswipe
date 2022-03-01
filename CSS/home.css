@@ -26,12 +26,6 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    opacity: 0;
-    transition: opacity 0.1s ease-in-out;
-}
-
-.loaded.matswipe {
-    opacity: 1;
 }
 
 .matswipe--status {
@@ -177,20 +171,12 @@ body {
     font-size: 2rem;
     line-height: 2;
     height: 50px;
-    transition: all 200ms linear;
     border-radius: 8px;
     width: 15%;
     letter-spacing: 1px;
     display: inline-flex;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
     align-items: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-    -ms-justify-content: center;
     justify-content: center;
-    -ms-flex-pack: center;
     text-align: center;
     border: none;
     background-color: #fff;
@@ -220,7 +206,6 @@ body {
 .dropdown:not(:checked)+label .uil {
     font-size: 24px;
     margin-left: 10px;
-    transition: transform 200ms linear;
 }
 
 .dropdown:checked+label .uil {

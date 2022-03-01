@@ -18,7 +18,7 @@ const auth = getAuth(app);
 
 onAuthStateChanged(auth, function(user) {
     if (user) {
-        // window.location = "PAGES/home.html";
+        window.location = "PAGES/home.html";
     } else {
         document.getElementById("matswipemaincon").style.display = "flex";
         document.getElementById("loader").style.display = "none";
