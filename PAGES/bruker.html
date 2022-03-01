@@ -4,18 +4,30 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Din bruker</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../CSS/bruker.css'>
 </head>
 
 <body>
-    <h1>Denne siden er under utvikling. Klikk <a href="../index.html">HER</a> for å komme tilbake.</h1>
-    <button id="signout">logg ut</button>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
-    <script src='../JS/bruker.js'></script>
+    <div class="matswipe">
+        <div id="popup">
+            <p>Sjekk Eposten din</p>
+            <button id="close">close</button>
+        </div>
+        <div class="bruker-box">
+            <p>Epost:</p>
+            <p id="epost"></p>
+            <button id="reset">Glemte passordet?</button><br>
+            <button id="signout">logg ut</button>
+        </div>
+
+    </div>
+
+
+
+    <script type="module" src='../JS/bruker.js'></script>
 </body>
 
 </html>

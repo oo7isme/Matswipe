@@ -12,9 +12,6 @@ var firebaseConfig = {
 };
 let app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
-
-
 onAuthStateChanged(auth, function(user) {
     if (user) {
 
@@ -32,12 +29,10 @@ var nope = document.getElementById('nope');
 var love = document.getElementById('love');
 var fav = document.getElementById('fav');
 
-// const matretter = require("../JSON/matretter.json")
-// console.log(matretter);
 
 function initCards(card, index) {
-    var newCards = document.querySelectorAll('.matswipe--card:not(.removed)');
 
+    var newCards = document.querySelectorAll('.matswipe--card');
     newCards.forEach(function(card, index) {
         card.style.zIndex = allCards.length - index;
         card.style.transform = 'scale(' + (20 - index) / 20 + ') translateY(-' + 0.00000001 * index + 'px)';
@@ -110,7 +105,7 @@ fav.addEventListener('click', favListener);
 
 function createButtonListener(love) {
     return function(event) {
-        var cards = document.querySelectorAll('.matswipe--card:not(.removed)');
+        var cards = document.querySelectorAll('.matswipe--card');
         var moveOutWidth = document.body.clientWidth * 1.5;
 
         if (!cards.length) return false;

@@ -1,0 +1,74 @@
+body {
+    background: #d5f5d5;
+    overflow: hidden;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.matswipe {
+    width: 360px;
+    height: 80vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    opacity: 1;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.bruker-box {
+    width: 360px;
+    height: 40%;
+    padding: 10%;
+    margin-top: 50%;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 60%;
+    border: 0;
+    border-radius: 20px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+#popup {
+    display: none;
+    position: fixed;
+    width: 360px;
+    height: 40%;
+    padding: 10%;
+    margin-top: 50%;
+}
+
+button #close {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 20%;
+    height: 20%;
+    border: 0;
+    border-radius: 20px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
