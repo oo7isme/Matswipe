@@ -22,10 +22,96 @@ onAuthStateChanged(auth, function(user) {
     }
 })
 
-
+var matswipeContainer = document.querySelector('.matswipe');
+var allCards = document.querySelectorAll('.matswipe--card');
+var nope = document.getElementById('nope');
+var love = document.getElementById('love');
 var fav = document.getElementById('fav');
 
 function favListener() {
     window.open('fav.html', "_self")
 }
 fav.addEventListener('click', favListener);
+
+var index = 0;
+
+function incrementIndex() {
+    ++index;
+    return index;
+}
+
+allCards.forEach(function(el) {
+    var hammertime = new Hammer(el);
+
+    hammertime.on('pan', function(event) {
+        el.classList.add('moving');
+    });
+
+    hammertime.on('pan', function(event) {
+        if (event.deltaX === 0) return;
+        if (event.center.x === 0 && event.center.y === 0) return;
+
+        matswipeContainer.classList.toggle('matswipe_love', event.deltaX > 0);
+        matswipeContainer.classList.toggle('matswipe_nope', event.deltaX < 0);
+
+        var xMulti = event.deltaX * 0.03;
+        var yMulti = event.deltaY / 80;
+        var rotate = xMulti * yMulti;
+
+        event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)';
+    });
+
+    hammertime.on('panend', function(event) {
+        el.classList.remove('moving');
+        matswipeContainer.classList.remove('matswipe_love');
+        matswipeContainer.classList.remove('matswipe_nope');
+
+        var moveOutWidth = document.body.clientWidth;
+        var keep = Math.abs(event.deltaX) < 80 || Math.abs(event.velocityX) < 0.5;
+
+        if (keep) {
+            event.target.style.transform = '';
+        } else {
+            var endX = Math.max(Math.abs(event.velocityX) * moveOutWidth, moveOutWidth);
+            var toX = event.deltaX > 0 ? endX : -endX;
+            var endY = Math.abs(event.velocityY) * moveOutWidth;
+            var toY = event.deltaY > 0 ? endY : -endY;
+            var xMulti = event.deltaX * 0.03;
+            var yMulti = event.deltaY / 80;
+            var rotate = xMulti * yMulti;
+
+            event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
+            if (event.deltaX > 0) {
+                liked(incrementIndex())
+            } else if (event.deltaX < 0) {
+                disliked(incrementIndex())
+            }
+        }
+    });
+});
+
+
+function createButtonListener(love) {
+    return function(event) {
+        var moveOutWidth = document.body.clientWidth * 1.5;
+        var card = document.getElementById('current_card')
+
+        if (love) {
+            card.style.transform = 'all 0.3s ease-in-out';
+            card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
+            btnliked(incrementIndex())
+        } else {
+            card.style.transform = 'all 0.3s ease-in-out';
+            card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
+            btndisliked(incrementIndex())
+        }
+
+        event.preventDefault();
+    };
+}
+
+var nopeListener = createButtonListener(false);
+var loveListener = createButtonListener(true);
+
+nope.addEventListener('click', nopeListener);
+love.addEventListener('click', loveListener);

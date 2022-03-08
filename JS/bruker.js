@@ -12,7 +12,6 @@ var firebaseConfig = {
 };
 let app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const user = auth.currentUser;
 onAuthStateChanged(auth, function(user) {
     if (user) {
         var email = user.email;
@@ -26,14 +25,12 @@ onAuthStateChanged(auth, function(user) {
 
 let signOutButton = document.getElementById("signout")
 signOutButton.addEventListener("click", (e) => {
-    //Prevent Default Form Submission Behavior
     e.preventDefault()
     auth.signOut()
 })
 
 const popup = document.getElementById("popup")
-    //const close = document.querySelector = "#close";
-
+const close = document.getElementById("close")
 let resetButton = document.getElementById('reset')
 resetButton.addEventListener("click", (e) => {
     e.preventDefault()
@@ -49,3 +46,13 @@ resetButton.addEventListener("click", (e) => {
             console.log(errorCode, errorMessage)
         });
 })
+close.addEventListener("click", myFunction);
+
+function myFunction() {
+    document.getElementById("popup").style.display = "none";
+}
+document.addEventListener('mouseup', function(e) {
+    if (!popup.contains(e.target)) {
+        popup.style.display = 'none';
+    }
+});
