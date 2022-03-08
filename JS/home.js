@@ -97,11 +97,11 @@ function createButtonListener(love) {
         var card = document.getElementById('current_card')
 
         if (love) {
-            card.style.transform = 'all 0.3s ease-in-out';
+            card.style.transition = 'all 0.3s ease-in-out';
             card.style.transform = 'translate(' + moveOutWidth + 'px, -100px) rotate(-30deg)';
             btnliked(incrementIndex())
         } else {
-            card.style.transform = 'all 0.3s ease-in-out';
+            card.style.transition = 'all 0.3s ease-in-out';
             card.style.transform = 'translate(-' + moveOutWidth + 'px, -100px) rotate(30deg)';
             btndisliked(incrementIndex())
         }

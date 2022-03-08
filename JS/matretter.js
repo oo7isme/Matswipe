@@ -64,7 +64,7 @@ async function liked(index) {
     nextMatrett(index)
     card.style.opacity = '1';
     await delay(100)
-    card.style.transition = 'all 0.3s ease-in-out';
+        // card.style.transition = 'all 0.3s ease-in-out';
 }
 
 async function disliked(index) {
@@ -77,7 +77,7 @@ async function disliked(index) {
     nextMatrett(index)
     card.style.opacity = '1';
     await delay(100)
-    card.style.transition = 'all 0.3s ease-in-out';
+        // card.style.transition = 'all 0.3s ease-in-out';
 }
 
 async function btnliked(index) {
