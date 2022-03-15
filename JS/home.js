@@ -48,6 +48,7 @@ allCards.forEach(function(el) {
     });
 
     hammertime.on('pan', function(event) {
+        event.target.style.transition = '';
         if (event.deltaX === 0) return;
         if (event.center.x === 0 && event.center.y === 0) return;
 
@@ -62,6 +63,7 @@ allCards.forEach(function(el) {
     });
 
     hammertime.on('panend', function(event) {
+        event.target.style.transition = 'transition: all 0.3s ease-in-out';
         el.classList.remove('moving');
         matswipeContainer.classList.remove('matswipe_love');
         matswipeContainer.classList.remove('matswipe_nope');
@@ -81,6 +83,7 @@ allCards.forEach(function(el) {
             var rotate = xMulti * yMulti;
 
             event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.deltaY) + 'px) rotate(' + rotate + 'deg)';
+            event.target.style.transition = '';
             if (event.deltaX > 0) {
                 liked(incrementIndex())
             } else if (event.deltaX < 0) {
@@ -93,6 +96,11 @@ allCards.forEach(function(el) {
 
 function createButtonListener(love) {
     return function(event) {
+        document.getElementById("love").disabled = true;
+        document.getElementById("nope").disabled = true;
+        setTimeout(function() { document.getElementById("love").disabled = false; }, 800);
+        setTimeout(function() { document.getElementById("nope").disabled = false; }, 800);
+
         var moveOutWidth = document.body.clientWidth * 1.5;
         var card = document.getElementById('current_card')
 

@@ -56,33 +56,34 @@ function delay(time) {
 
 async function liked(index) {
     var card = document.getElementById('current_card');
+    await delay(100)
     card.style.transition = 'none';
     card.style.opacity = '0';
     card.style.transform = 'none';
-    console.log("liked")
-    await delay(300)
+    var id = document.getElementById('current_title').textContent
+    console.log("Liked " + id)
     nextMatrett(index)
     card.style.opacity = '1';
-    await delay(100)
-        // card.style.transition = 'all 0.3s ease-in-out';
+    // card.style.transition = 'all 0.3s ease-in-out';
 }
 
 async function disliked(index) {
     var card = document.getElementById('current_card');
+    await delay(100)
     card.style.transition = 'none';
     card.style.opacity = '0';
     card.style.transform = 'none';
-    console.log("liked")
-    await delay(300)
+    var id = document.getElementById('current_title').textContent
+    console.log("Disliked " + id)
     nextMatrett(index)
     card.style.opacity = '1';
-    await delay(100)
-        // card.style.transition = 'all 0.3s ease-in-out';
+    // card.style.transition = 'all 0.3s ease-in-out';
 }
 
 async function btnliked(index) {
     var card = document.getElementById('current_card');
-    console.log("liked")
+    id = document.getElementById('current_title').textContent
+    console.log("Liked " + id)
     await delay(300)
     card.style.transition = 'none';
     card.style.opacity = '0';
@@ -91,12 +92,13 @@ async function btnliked(index) {
     nextMatrett(index)
     card.style.opacity = '1';
     await delay(100)
-    card.style.transition = 'all 0.3s ease-in-out';
+    card.style.transition = 'none';
 }
 
 async function btndisliked(index) {
     var card = document.getElementById('current_card');
-    console.log("disliked")
+    id = document.getElementById('current_title').textContent
+    console.log("Disliked " + id)
     await delay(300)
     card.style.transition = 'none';
     card.style.opacity = '0';
@@ -105,5 +107,5 @@ async function btndisliked(index) {
     nextMatrett(index)
     card.style.opacity = '1';
     await delay(100)
-    card.style.transition = 'all 0.3s ease-in-out';
+    card.style.transition = 'none';
 }
