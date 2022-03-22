@@ -1,3 +1,5 @@
+/* GLOBAL */
+
 *,
 *:before,
 *:after {
@@ -11,6 +13,9 @@ body {
     overflow: hidden;
     font-family: sans-serif;
 }
+
+
+/* HEADER */
 
 .version-number {
     color: grey;
@@ -34,6 +39,9 @@ body {
     flex-direction: column;
     position: relative;
 }
+
+
+/* HIDDEN EFFECTS */
 
 .matswipe--status {
     position: absolute;
@@ -64,6 +72,9 @@ body {
     opacity: 0.7;
     transform: scale(1);
 }
+
+
+/* MAIN CARDS */
 
 .matswipe--cards {
     flex-grow: 1;
@@ -116,6 +127,9 @@ body {
     pointer-events: none;
 }
 
+
+/* NAV BUTTONS */
+
 .matswipe--buttons {
     flex: 0 0 100px;
     text-align: center;
@@ -152,6 +166,9 @@ body {
 .fa-archive {
     color: aquamarine;
 }
+
+
+/* HEADER MENU */
 
 .sec-center {
     margin-top: 2%;
@@ -293,4 +310,88 @@ body {
     align-items: center;
     justify-content: space-between;
     -ms-flex-pack: distribute;
+}
+
+
+/* POPUP */
+
+#popup {
+    display: none;
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    padding: 10%;
+    margin-top: 20%;
+    margin-left: 10%;
+    background-color: #FFFFFF;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    animation: pop-in 0.2s;
+    z-index: 2;
+    border-radius: 20px;
+    overflow: scroll;
+}
+
+.tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tags li {
+    float: left;
+}
+
+.tag {
+    background: #eee;
+    border-radius: 3px 10px 10px 3px;
+    color: #999;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.tag::before {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+    content: '';
+    height: 6px;
+    left: 10px;
+    position: absolute;
+    width: 6px;
+    top: 10px;
+}
+
+.tag::after {
+    background: #fff;
+    border-bottom: 13px solid transparent;
+    border-top: 13px solid transparent;
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#close {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 80%;
+    border: 0;
+    border-radius: 25px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 1rem;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    height: 20%;
 }

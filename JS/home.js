@@ -22,17 +22,32 @@ onAuthStateChanged(auth, function(user) {
     }
 })
 
+
+// GENERAL USE ELEMENTS
 var matswipeContainer = document.querySelector('.matswipe');
 var currentCard = document.getElementById('current_card')
 var nope = document.getElementById('nope');
 var love = document.getElementById('love');
 var fav = document.getElementById('fav');
 
-function favListener() {
-    window.open('fav.html', "_self")
-}
-fav.addEventListener('click', favListener);
 
+
+// EVENT LISTENERS
+fav.addEventListener('click', () => {
+    window.open('fav.html', "_self")
+});
+document.getElementById('filter').addEventListener('click', () => {
+    popup.style.display = "flex";
+});
+
+document.querySelector('#close').addEventListener('click', () => {
+    document.getElementById('popup').style.display = 'none';
+});
+
+
+
+//  FUNCTIONS
+// Increment index
 var index = 0;
 
 function incrementIndex() {
@@ -40,6 +55,9 @@ function incrementIndex() {
     return index;
 }
 
+
+
+// MAIN SWIPE CODE
 var hammertime = new Hammer(currentCard);
 
 hammertime.on('pan', function(event) {
@@ -92,6 +110,8 @@ hammertime.on('panend', function(event) {
 });
 
 
+
+// LIKE DISLIKE BUTTONS
 function createButtonListener(love) {
     return function(event) {
         document.getElementById("love").disabled = true;
@@ -115,9 +135,35 @@ function createButtonListener(love) {
         event.preventDefault();
     };
 }
-
 var nopeListener = createButtonListener(false);
 var loveListener = createButtonListener(true);
-
 nope.addEventListener('click', nopeListener);
 love.addEventListener('click', loveListener);
+
+
+
+// TAGS FILTER SYSTEM
+var filter = [];
+var tags = document.querySelectorAll('.tag')
+tags.forEach(item => {
+    item.addEventListener('click', event => {
+        if (item.getAttribute('clicked') == null) {
+            item.setAttribute('clicked', 'false')
+        }
+        if (item.getAttribute('clicked') == 'false') {
+            filter.push(item.textContent.toLowerCase());
+            console.log(filter)
+            item.setAttribute('clicked', 'true')
+            item.style.background = "#4CAF50";
+            item.style.color = "white";
+            return;
+        }
+        if (item.getAttribute('clicked') == 'true') {
+            filter.splice(filter.indexOf(item.textContent.toLowerCase()), 1)
+            console.log(filter)
+            item.style.background = "#eee";
+            item.style.color = "#999";
+            item.setAttribute('clicked', 'false')
+        }
+    })
+})
