@@ -1,4 +1,3 @@
-addToHomescreen();
 document.getElementById("matswipemaincon").style.display = "none";
 document.getElementById("loader").style.display = "block";
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
