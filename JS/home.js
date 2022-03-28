@@ -22,17 +22,28 @@ onAuthStateChanged(auth, function(user) {
     }
 })
 
+
+// GENERAL USE ELEMENTS
 var matswipeContainer = document.querySelector('.matswipe');
 var currentCard = document.getElementById('current_card')
 var nope = document.getElementById('nope');
 var love = document.getElementById('love');
 var fav = document.getElementById('fav');
 
-function favListener() {
-    window.open('fav.html', "_self")
-}
-fav.addEventListener('click', favListener);
 
+
+// EVENT LISTENERS
+fav.addEventListener('click', () => {
+    window.open('fav.html', "_self")
+});
+document.getElementById('filter').addEventListener('click', () => {
+    popup.style.display = "flex";
+});
+
+
+
+//  FUNCTIONS
+// Increment index
 var index = 0;
 
 function incrementIndex() {
@@ -40,6 +51,9 @@ function incrementIndex() {
     return index;
 }
 
+
+
+// MAIN SWIPE CODE
 var hammertime = new Hammer(currentCard);
 
 hammertime.on('pan', function(event) {
@@ -92,6 +106,8 @@ hammertime.on('panend', function(event) {
 });
 
 
+
+// LIKE DISLIKE BUTTONS
 function createButtonListener(love) {
     return function(event) {
         document.getElementById("love").disabled = true;
@@ -115,9 +131,5 @@ function createButtonListener(love) {
         event.preventDefault();
     };
 }
-
-var nopeListener = createButtonListener(false);
-var loveListener = createButtonListener(true);
-
-nope.addEventListener('click', nopeListener);
-love.addEventListener('click', loveListener);
+nope.addEventListener('click', createButtonListener(false));
+love.addEventListener('click', createButtonListener(true));
