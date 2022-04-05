@@ -371,7 +371,7 @@ async function disliked(index) {
 
 async function btnliked(index) {
     var card = document.getElementById('current_card');
-    id = document.getElementById('current_title').textContent
+    var id = document.getElementById('current_title').textContent
     console.log("Liked " + id)
     await delay(300)
     card.style.transition = 'none';
@@ -386,7 +386,7 @@ async function btnliked(index) {
 
 async function btndisliked(index) {
     var card = document.getElementById('current_card');
-    id = document.getElementById('current_title').textContent
+    var id = document.getElementById('current_title').textContent
     console.log("Disliked " + id)
     await delay(300)
     card.style.transition = 'none';
