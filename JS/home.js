@@ -26,7 +26,7 @@ onAuthStateChanged(auth, function(user) {
         }
     }
 })
-await new Promise(r => setTimeout(r, 500));
+await new Promise(r => setTimeout(r, 1000));
 
 
 // GENERAL USE ELEMENTS
@@ -152,7 +152,7 @@ var filter = get(child(dbRef, "filter/" + uid)).then((snapshot) => {
 }).catch((error) => {
     console.error(error);
 });
-await new Promise(r => setTimeout(r, 1000));
+await new Promise(r => setTimeout(r, 500));
 var tags = document.querySelectorAll('.tag')
 filter.forEach(filter => {
     tags.forEach(item => {
