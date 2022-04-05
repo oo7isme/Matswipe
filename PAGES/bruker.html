@@ -1,18 +1,39 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Din bruker</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../CSS/bruker.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-    <h1>Denne siden er under utvikling. Klikk <a href="../index.html">HER</a> for å komme tilbake.</h1>
-    <button id="signout">logg ut</button>
 
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
-    <script src='../JS/bruker.js'></script>
+<body>
+
+    <div class="matswipe" id="matswipe">
+        <div id="popup">
+            <img id="pic" src="../IMG/matswipetrans.png" alt="MatSwipe">
+            <p>Sjekk Eposten din</p>
+            <button id="close">close</button>
+        </div>
+        <div class="bruker-box">
+            <h1>Din Bruker</h1>
+            <p>Epost:</p>
+            <div class="epost-box">
+                <p id="epost"></p>
+            </div>
+            <br><br><button id="reset">Glemt passord</button>
+            <br><button id="signout">Logg ut</button>
+        </div>
+        <div class="matswipe--buttons">
+            <button id="back"><i class="fa fa-arrow-left"></i></button>
+        </div>
+        <script src="../JS/fav.js"></script>
+    </div>
+    <script type="module" src='../JS/bruker.js'></script>
 </body>
+
 </html>

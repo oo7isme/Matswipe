@@ -1,81 +1,149 @@
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <title>MatSwipe - Hjem</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
 
-  </head>
 
-  <body>
+</head>
 
-  <div class="matswipe">
-    <div class="matswipe--status">
-      <i class="fa fa-remove"></i>
-      <i class="fa fa-heart"></i>
+<body>
+    <div id="loader"></div>
+    <div id="matswipemaincon" class="matswipe">
+
+
+
+
+        <!-- HIDDEN EFFECTS -->
+        <div class="matswipe--status">
+            <i class="fa fa-remove"></i>
+            <i class="fa fa-heart"></i>
+        </div>
+
+
+
+
+        <!-- HEADER -->
+        <div class="headertop">
+            <div class="sec-center">
+                <input class="dropdown" type="checkbox" id="dropdown" name="dropdown" />
+                <label class="for-dropdown" for="dropdown"><i class="fa fa-bars"></i></label>
+                <div class="section-dropdown">
+                    <a href="bruker.html">Din Bruker <i class="fa fa-arrow-right"></i></a>
+                    <a href="om.html">Om Oss <i class="fa fa-arrow-right"></i></a>
+                    <a href="kontakt.html">Kontakt <i class="fa fa-arrow-right"></i></a>
+                    <a href="personvern.html">Personvern <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Version number update with 0.1 per small update and 1.0 per big update -->
+            <p class="version-number">v2.3</p>
+
+            <div class="logo">
+                <img src="../IMG/matswipetrans.png" alt="MatSwipe">
+            </div>
+        </div>
+
+
+
+
+        <!-- FILTER -->
+        <div id="popup">
+            <h2>Kjøtt</h2><br>
+            <ul class="tags">
+                <li class="tag" id="svin">Svin</li>
+                <li class="tag" id="kylling">Kylling</li>
+                <li class="tag" id="lam">Lam</li>
+                <li class="tag" id="kjøttdeig">Kjøttdeig</li>
+                <li class="tag" id="nakkekotletter">Nakkekotletter</li>
+            </ul>
+            <h2>Grønnsaker</h2><br>
+            <ul class="tags">
+                <li class="tag" id="tomat">Tomat</li>
+                <li class="tag" id="paprika">Paprika</li>
+                <li class="tag" id="hvitløk">Hvitløk</li>
+                <li class="tag" id="løk">Løk</li>
+                <li class="tag" id="sitron">Sitron</li>
+                <li class="tag" id="kål">Kål</li>
+                <li class="tag" id="hodekål">Hodekål</li>
+                <li class="tag" id="chilli">Chilli</li>
+                <li class="tag" id="spinat">Spinat</li>
+                <li class="tag" id="grønnkal">Grønnkål</li>
+                <li class="tag" id="potet">Potet</li>
+                <li class="tag" id="avokado">Avokado</li>
+                <li class="tag" id="gulrot">Gulrot</li>
+                <li class="tag" id="stangselleri">Stangselleri</li>
+                <li class="tag" id="mais">Mais</li>
+                <li class="tag" id="ruccula">Ruccula</li>
+            </ul>
+
+            <h2>Bakeri og Brød</h2><br>
+            <ul class="tags">
+                <li class="tag" id="brød">Brød</li>
+                <li class="tag" id="baguette">Baguette</li>
+                <li class="tag" id="mel">Mel</li>
+            </ul>
+            <h2>Meieri</h2><br>
+            <ul class="tags">
+                <li class="tag" id="egg">Egg</li>
+                <li class="tag" id="melk">Melk</li>
+                <li class="tag" id="smør">Smør</li>
+                <li class="tag" id="margarin">Margarin</li>
+                <li class="tag" id="ost">Ost</li>
+            </ul>
+            <h2>Andre</h2><br>
+            <ul class="tags">
+                <li class="tag" id="olje">Olje</li>
+                <li class="tag" id="bønner">Bønner</li>
+                <li class="tag" id="ketchup">Ketchup</li>
+                <li class="tag" id="tacosaus">Tacosaus</li>
+                <li class="tag" id="tortilla">Tortilla</li>
+            </ul> <br><br><br><br>
+
+            <button id="close">Close</button>
+        </div>
+
+
+
+
+        <!-- MAIN CARDS -->
+        <div class="matswipe--cards">
+            <div id="next_card" class="matswipe--card">
+                <img id="next_pic">
+                <h3 id="next_title"></h3>
+                <p id="next_desc"></p>
+            </div>
+
+            <div id="current_card" class="matswipe--card">
+                <img id="current_pic">
+                <h3 id="current_title"></h3>
+                <p id="current_desc"></p>
+            </div>
+        </div>
+
+
+
+
+        <!-- NAV BUTTONS -->
+        <div class="matswipe--buttons">
+            <button id="nope"><i class="fa fa-remove"></i></button>
+            <button id="fav"><i class="fa fa-archive"></i></button>
+            <button id="filter"><i class="fa fa-filter"></i></button>
+            <button id="love"><i class="fa fa-heart"></i></button>
+        </div>
+
+
+
     </div>
 
-    <div class="sec-center"> 	
-      <input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
-      <label class="for-dropdown" for="dropdown"><i class="fa fa-bars"></i></label>
-      <div class="section-dropdown"> 
-        <a href="bruker.html">Din Bruker <i class="fa fa-arrow-right"></i></a>
-        <a href="om.html">Om Oss <i class="fa fa-arrow-right"></i></a>
-        <a href="kontakt.html">Kontakt <i class="fa fa-arrow-right"></i></a>
-        <a href="personvern.html">Personvern <i class="fa fa-arrow-right"></i></a>
-      </div>  
-    </div>
-
-    <div class="matswipe--cards">
-
-      <div id="current" class="matswipe--card">
-
-      </div>
-
-      <div id="next" class="matswipe--card">
-        <img id="pic" src="">
-        <h3 id="title"></h3>
-        <p id="desc"></p>
-      </div>
-
-      <!-- <div class="matswipe--card">
-        <img src="https://previews.123rf.com/images/gdolgikh/gdolgikh1703/gdolgikh170300221/74432760-%E7%89%9B%E8%82%89%E3%81%AE%E3%82%BF%E3%82%B3%E3%82%B9.jpg">
-        <h3>Taco</h3>
-        <p>Taco som vi kjenner den! Oppskrift på klassisk norsk taco – fersk og hjemmelaget. Taco er en tradisjonell meksikansk rett som nordmenn har tatt til sitt hjerte og gjort litt sin egen. Fredagen er ofte ikke den samme uten fredagstaco.</p>
-      </div>
-      <div class="matswipe--card">
-        <img src="https://coop.no/globalassets/coop-extra/mat--trender/rask-pasta-bolognese-1200-720.gif?preset=Large">
-        <h3>Pasta Bolognese</h3>
-        <p>Pasta bolognese er nok en av verdens mest populære retter, og den skal inneholde storfekjøtt i små biter, pancetta som er en type bacon, løk, gulrøtter, selleri, tomat, kjøttkraft, vin og eventuelt melk. </p>
-      </div>
-      <div class="matswipe--card">
-        <img src="https://pagen.no/globalassets/recept/bruchetta.jpg?w=734&h=462&mode=crop&resized=true">
-        <h3>Bruschetta</h3>
-        <p>Bruschetta er en matrett fra Italia. Den består av grillede eller stekte biter av brød eller baguett med hvitløk og olivenolje påsmurt og med saltdryss.</p>
-      </div>
-      <div class="matswipe--card">
-        <img src="https://www.aperitif.no/storage/image/core_files/2015/3/2/de4912925c946321bb7d45d2431833fc/jpg/aperitif/article_details_medium/original.jpg">
-        <h3>Salat</h3>
-        <p>Salat er en kald, eller lun matrett som inneholder en blanding oppskårne eller strimlete ingredienser. Ingrediensene er ofte rå, og kan omfatte bladgrønnsaker som salat, spinat eller lignende vekster, ulike grønnsaker, frukt, nøtter, kjøtt og sjømat.</p>
-      </div>
-      <div class="matswipe--card">
-        <img src="https://husglede.no/wp-content/uploads/2020/08/TOmatsuppe-hovedbilde.jpg">
-        <h3>Tomatsuppe</h3>
-        <p>Tomatsuppe er en suppe laget av tomater. Den serveres både varm og kald, og er ofte brukt som ingrediens i mer avanserte retter. Det er også vanlig å tilsette makaroni eller egg.</p>
-      </div> -->
-    </div>
-
-    <div class="matswipe--buttons">
-      <button id="nope"><i class="fa fa-remove"></i></button>
-      <button id="fav"><i class="fa fa-archive"></i></button>
-      <button id="love"><i class="fa fa-heart"></i></button>
-    </div>
-  </div>
+    <!-- SCRIPTS -->
     <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
-    <script  src="../JS/home.js"></script>
+    <script type="module" src="../JS/home.js"></script>
     <link rel="stylesheet" href="../CSS/home.css">
-  </body>
+</body>
+
 </html>

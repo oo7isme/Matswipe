@@ -1,37 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="CSS/index.css" />
-  <title>MatSwipe - Login</title>
-<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="CSS/index.css" />
+    <title>MatSwipe</title>
+
+    <!-- Mobile desktop app -->
+    <link rel="apple-touch-icon" sizes="57x57" href="desktopapp/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="desktopapp/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="desktopapp/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="desktopapp/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="desktopapp/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="desktopapp/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="desktopapp/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="desktopapp/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="desktopapp/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="desktopapp/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="desktopapp/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="desktopapp/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="desktopapp/favicon-16x16.png">
+    <link rel="manifest" href="desktopapp/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="desktopapp/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+</head>
+
 <body>
-  
-  <div class="matswipe">
-    <h1>MatSwipe</h1>
-    <div class="login-box">
-        <div class="form">
-            <form class="register-form">
-                <p id="login-title">Ny konto</p>
-                <input id="inputEmail" type="email" class="form-control" placeholder="Epost"/>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Passord"/>
-                <button type="submit" id="signup">Opprett konto</button>
-                <p class="message">Har allerede en konto?<a href="#"> Logg inn</a></p>
-              </form>
+    <div id="loader"></div>
+    <div id="matswipemaincon" class="matswipe">
+        <img id="headerpic" src="IMG/matswipetrans.png" alt="MatSwipe">
+        <div class="login-box">
+            <div class="form">
+                <form class="register-form">
+                    <p id="login-title">Ny konto</p>
+                    <input id="inputEmail" type="email" class="form-control" placeholder="Epost" />
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Passord" />
+                    <button type="submit" id="signup">Opprett konto</button>
+                    <p class="message">Har allerede en konto?<a href="#"> Logg inn</a></p>
+                </form>
                 <form class="login-form">
                     <p id="login-title">Logg inn</p>
-                    <input type="text" id="inputEmail1" placeholder="Epost"/>
-                    <input type="password" id="inputPassword1" placeholder="Passord"/>
-                    <button type="submit"  id="signin">Logg inn</button>
-                    <p class="message">Har ikke bruker?<a href="#"> Ny konto</a></p>
+                    <input type="text" id="inputEmail1" placeholder="Epost" />
+                    <input type="password" id="inputPassword1" placeholder="Passord" />
+                    <button type="submit" id="signin">Logg inn</button>
+                    <p class="message">Har du ikke bruker?<a href="#"> Ny konto</a></p>
                 </form>
+            </div>
         </div>
-      </div>
-</div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
-  <script src="JS/index.js"></script>
-<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6dddabd5dd740b06',m:'KSl5.nYnncgmcI7Ih_L.1IoHgENHyPpU3lf_ij5OVdw-1644919038-0-AWA6CEPphLghKw31bmRkMpSpC4MrFhts5B050Incc8W+7hQ7Ltmd8yXEiWFUvYFNKak35RtmueHVbO1xRyPJJHVmRnFpMXRcGt2WyXZFPNHJJ3IpjFExvtPRap/KIx94QdEmOH9HSqkV0Bpws7hLzeSm+Sqs6GULqD9MC9g7vK4idFhGpTf1YWjeCLjdR21gtQ==',s:[0x88b604c3e9,0xf4794f6806],}})();</script></body>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script type="module" src="JS/index.js"></script>
+</body>
+
 </html>

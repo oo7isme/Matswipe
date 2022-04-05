@@ -1,1 +1,42 @@
-<h1>Denne siden er under utvikling. Klikk <a href="../index.html">HER</a> for å komme tilbake.</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Kontakt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/kontakt.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <div class="matswipe" id="matswipe">
+        <div id="popup">
+            <img id="pic" src="../IMG/matswipetrans.png" alt="MatSwipe">
+            <p></p>
+            <button id="close">close</button>
+        </div>
+
+        <div class="form">
+            <p id="kontakt">Kontakt oss</p>
+            <form action="#">
+                <p id="fornavn">Fornavn</p>
+                <input type="text" id="fname" name="firstname" placeholder="Fornavn">
+                <p id="etternavn">Etternavn</p>
+                <input type="text" id="lname" name="lastname" placeholder="Etternavn">
+                <p id="melding">Melding</p>
+                <textarea id="subject" name="subject" placeholder="Skriv her..."></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="matswipe--buttons">
+            <button id="back"><i class="fa fa-arrow-left"></i></button>
+        </div>
+        <script src="../JS/kontakt.js"></script>
+    </div>
+</body>
+
+</html>
