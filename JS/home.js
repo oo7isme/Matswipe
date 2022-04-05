@@ -324,6 +324,15 @@ function nextMatrett(index) {
     if (index == matretterListe.length) {
         document.getElementById('current_card').style.display = 'none'
         alert("Ingen fler matretter ble funnet med dine filtre!")
+        const writeFilterReset = async() => {
+            try {
+                await set(ref(db, 'filter/' + uid), ["default"]);
+                location.reload()
+            } catch (ex) {
+                console.error(`Error while setting data: ${ex.message}`);
+            }
+        };
+        writeFilterReset();
         location.reload()
     }
 
