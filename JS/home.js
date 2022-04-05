@@ -16,16 +16,18 @@ let app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase();
 
-var uid;
+let uid = '';
 onAuthStateChanged(auth, function(user) {
     if (user) {
-        uid = user.uid;
+        uid = user.uid
+        console.log(uid);
     } else {
         if (window.location != 'index.html') {
             window.location = "../index.html";
         }
     }
 })
+
 await new Promise(r => setTimeout(r, 1000));
 
 
@@ -142,12 +144,19 @@ love.addEventListener('click', loveListener);
 // TAGS FILTER SYSTEM
 const dbRef = ref(getDatabase());
 
-const user = auth.currentUser;
 var filter = get(child(dbRef, "filter/" + uid)).then((snapshot) => {
     if (snapshot.exists()) {
         filter = snapshot.val();
     } else {
-        console.log("No data available");
+        const writeFilterInit = async() => {
+            try {
+                await set(ref(db, 'filter/' + uid), ["default"]);
+                location.reload()
+            } catch (ex) {
+                console.error(`Error while setting data: ${ex.message}`);
+            }
+        };
+        writeFilterInit();
     }
 }).catch((error) => {
     console.error(error);
