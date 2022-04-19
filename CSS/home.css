@@ -36,6 +36,12 @@ body {
     }
 }
 
+#loader_text {
+    text-align: center;
+    margin-top: 10%;
+    color: grey;
+}
+
 
 /* HEADER */
 

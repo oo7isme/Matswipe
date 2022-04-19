@@ -1,8 +1,9 @@
 document.getElementById("matswipemaincon").style.display = "none";
 document.getElementById("loader").style.display = "block";
+document.getElementById("loader_text").style.display = "block";
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
-import { getDatabase, ref, set, onValue, child, get } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
+import { getDatabase, ref, set, onValue, child, get, push, update } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
     authDomain: "matswipe-30b10.firebaseapp.com",
@@ -233,7 +234,16 @@ var matretterListe = obj.matretter.filter(matrett => {
     return matrett.tags.some(tag => filter.includes(tag))
 })
 
-
+let test = [];
+var likedListe = get(child(ref(getDatabase()), "archive/" + uid + "/liked")).then((snapshot) => {
+    if (snapshot.exists()) {
+        likedListe = snapshot.val();
+    }
+}).catch((error) => {
+    console.error(error);
+});
+await new Promise(r => setTimeout(r, 1000));
+console.log(likedListe);
 
 document.getElementById('filter').addEventListener('click', () => {
     popup.style.display = "flex";
@@ -343,6 +353,39 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+function saveLikedFood() {
+    const db = getDatabase();
+
+    // A post entry.
+    const postData = matretterListe[index - 1]
+
+    // Get a key for a new Post.
+    const newPostKey = push(child(ref(db), 'liked')).key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    const updates = {};
+    updates['archive/' + uid + '/liked/' + newPostKey] = postData;
+
+    return update(ref(db), updates);
+}
+
+function saveDislikedFood() {
+    const db = getDatabase();
+
+    // A post entry.
+    const postData = matretterListe[index - 1]
+
+    // Get a key for a new Post.
+    const newPostKey = push(child(ref(db), 'liked')).key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    const updates = {};
+    updates['archive/' + uid + '/disliked/' + newPostKey] = postData;
+
+    return update(ref(db), updates);
+}
+
+
 async function liked(index) {
     var card = document.getElementById('current_card');
     await delay(100)
@@ -351,6 +394,7 @@ async function liked(index) {
     card.style.transform = 'none';
     var id = document.getElementById('current_title').textContent
     console.log("Liked " + id)
+    saveLikedFood()
     nextMatrett(index)
     card.style.opacity = '1';
 
@@ -365,6 +409,7 @@ async function disliked(index) {
     card.style.transform = 'none';
     var id = document.getElementById('current_title').textContent
     console.log("Disliked " + id)
+    saveDislikedFood()
     nextMatrett(index)
     card.style.opacity = '1';
 }
@@ -378,6 +423,7 @@ async function btnliked(index) {
     card.style.opacity = '0';
     card.style.transform = 'none';
     await delay(300)
+    saveLikedFood()
     nextMatrett(index)
     card.style.opacity = '1';
     await delay(100)
@@ -393,6 +439,7 @@ async function btndisliked(index) {
     card.style.opacity = '0';
     card.style.transform = 'none';
     await delay(300)
+    saveDislikedFood()
     nextMatrett(index)
     card.style.opacity = '1';
     await delay(100)
@@ -400,6 +447,10 @@ async function btndisliked(index) {
 }
 
 
+
+
+
 // KEEP THIS AT THE BOTTOM ITS A LOADER
 document.getElementById("matswipemaincon").style.display = "flex";
 document.getElementById("loader").style.display = "none";
+document.getElementById("loader_text").style.display = "none";
