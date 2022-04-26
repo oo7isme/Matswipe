@@ -31,7 +31,6 @@ onAuthStateChanged(auth, function(user) {
 
 await new Promise(r => setTimeout(r, 1000));
 
-
 // GENERAL USE ELEMENTS
 var matswipeContainer = document.querySelector('.matswipe');
 var currentCard = document.getElementById('current_card')
@@ -228,22 +227,34 @@ let matretter = {
         { "id": "21", "title": "Kyllinggryte med kikerter, tomat og spinat", "desc": "Prøv denne superraske og enkle kyllinggryten med kikerter, hermetiske tomater og spinat. Dette er kjempegod og sunn hverdagskost!", "pic": "https://images.matprat.no/50d06d880d2f835f56001403-jumbotron/large", "tags": ["default", "kylling", "spinat", "løk", "chili", "olje", ] }
     ]
 };
-const obj = JSON.parse(JSON.stringify(matretter));
+var obj;
+
+function getMatretterListeFromDB() {
+    get(child(dbRef, "users/" + uid)).then((snapshot) => {
+        if (snapshot.exists()) {
+            obj = snapshot.val();
+        } else {
+            const writeListeData = async() => {
+                try {
+                    await set(ref(db, 'users/' + uid), matretter);
+                } catch (ex) {
+                    console.error(`Error while setting data: ${ex.message}`);
+                }
+            };
+            writeListeData();
+            getMatretterListeFromDB()
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+getMatretterListeFromDB()
+await new Promise(r => setTimeout(r, 500));
+
 
 var matretterListe = obj.matretter.filter(matrett => {
     return matrett.tags.some(tag => filter.includes(tag))
 })
-
-let test = [];
-var likedListe = get(child(ref(getDatabase()), "archive/" + uid + "/liked")).then((snapshot) => {
-    if (snapshot.exists()) {
-        likedListe = snapshot.val();
-    }
-}).catch((error) => {
-    console.error(error);
-});
-await new Promise(r => setTimeout(r, 1000));
-console.log(likedListe);
 
 document.getElementById('filter').addEventListener('click', () => {
     popup.style.display = "flex";
@@ -265,18 +276,6 @@ document.querySelector('#close').addEventListener('click', () => {
         location.reload();
     });
 });
-
-obj.matretter.forEach(matrett => {
-    const writeFoodData = async() => {
-        try {
-            await set(ref(db, 'matretter/' + matrett.id), matrett);
-        } catch (ex) {
-            console.error(`Error while setting data: ${ex.message}`);
-        }
-    };
-    writeFoodData();
-})
-
 
 
 
@@ -355,33 +354,17 @@ function delay(time) {
 
 function saveLikedFood() {
     const db = getDatabase();
-
-    // A post entry.
     const postData = matretterListe[index - 1]
-
-    // Get a key for a new Post.
-    const newPostKey = push(child(ref(db), 'liked')).key;
-
-    // Write the new post's data simultaneously in the posts list and the user's post list.
     const updates = {};
-    updates['archive/' + uid + '/liked/' + newPostKey] = postData;
-
+    updates['users/' + uid + '/liked/' + postData.id] = postData;
     return update(ref(db), updates);
 }
 
 function saveDislikedFood() {
     const db = getDatabase();
-
-    // A post entry.
     const postData = matretterListe[index - 1]
-
-    // Get a key for a new Post.
-    const newPostKey = push(child(ref(db), 'liked')).key;
-
-    // Write the new post's data simultaneously in the posts list and the user's post list.
     const updates = {};
-    updates['archive/' + uid + '/disliked/' + newPostKey] = postData;
-
+    updates['users/' + uid + '/disliked/' + postData.id] = postData;
     return update(ref(db), updates);
 }
 
@@ -446,6 +429,37 @@ async function btndisliked(index) {
     card.style.transition = 'none';
 }
 
+
+onValue(ref(db, 'users/' + uid + '/liked'), (snapshot) => {
+    const data = snapshot.val();
+    removeDataFromDB(data)
+});
+onValue(ref(db, 'users/' + uid + '/disliked'), (snapshot) => {
+    const data = snapshot.val();
+    removeDataFromDB(data)
+});
+
+function removeDataFromDB(data) {
+    matretterListe.forEach((matrett) => {
+        if (data == null) {
+            return
+        } else {
+            data.forEach((data) => {
+                if (data.id == matrett.id) {
+                    const removeFromList = async() => {
+                        try {
+                            await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                        } catch (ex) {
+                            console.error(`Error while setting data: ${ex.message}`);
+                        }
+                    };
+                    removeFromList();
+                }
+            })
+        }
+
+    })
+}
 
 
 

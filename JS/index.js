@@ -2,7 +2,7 @@ document.getElementById("matswipemaincon").style.display = "none";
 document.getElementById("loader").style.display = "block";
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
-import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
+import { getDatabase, ref, set, get, child } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
     authDomain: "matswipe-30b10.firebaseapp.com",
@@ -14,7 +14,6 @@ var firebaseConfig = {
 };
 let app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
 
 onAuthStateChanged(auth, function(user) {
     if (user) {
@@ -39,19 +38,6 @@ signUpButton.addEventListener("click", (e) => {
     createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((user) => {
             // Signed in
-            // const writeUserData = async() => {
-            //     try {
-            //         const db = getDatabase();
-            //         const nodeRef = ref(db, 'like/' + user.uid);
-            //         const theData = {
-            //             "001": "null"
-            //         };
-            //         await set(nodeRef, theData);
-            //     } catch (ex) {
-            //         console.error(`Error while setting data: ${ex.message}`);
-            //     }
-            // };
-            // writeUserData();
         })
         .catch((error) => {
             var errorCode = error.code;
