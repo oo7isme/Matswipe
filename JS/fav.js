@@ -61,25 +61,35 @@ likedList.forEach((liked) => {
     img.className = 'img'
     document.getElementById(matrett.id).appendChild(img)
 
+    var matrettunder = document.createElement('div')
+    matrettunder.className = 'matrettunder'
+    matrettunder.id = 'matrettunder' + matrett.id
+    document.getElementById(matrett.id).appendChild(matrettunder)
+
     var title = document.createElement('h3')
     title.innerHTML = liked.title
     title.className = 'title'
-    document.getElementById(matrett.id).appendChild(title)
+    document.getElementById(matrettunder.id).appendChild(title)
+
+    var tagsdiv = document.createElement('div')
+    tagsdiv.className = 'tagsdiv'
+    tagsdiv.id = 'tagsdiv' + matrett.id
+    document.getElementById(matrettunder.id).appendChild(tagsdiv)
 
     var tag1 = document.createElement('div')
     tag1.className = 'tag1'
     tag1.textContent = liked.tags[1]
-    document.getElementById(matrett.id).appendChild(tag1)
+    document.getElementById(tagsdiv.id).appendChild(tag1)
 
     var tag2 = document.createElement('div')
     tag2.className = 'tag2'
     tag2.textContent = liked.tags[2]
-    document.getElementById(matrett.id).appendChild(tag2)
+    document.getElementById(tagsdiv.id).appendChild(tag2)
 
     var tag3 = document.createElement('div')
     tag3.className = 'tag3'
     tag3.textContent = liked.tags[3]
-    document.getElementById(matrett.id).appendChild(tag3)
+    document.getElementById(tagsdiv.id).appendChild(tag3)
 
 })
 
