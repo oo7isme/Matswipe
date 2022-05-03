@@ -1,6 +1,7 @@
 document.getElementById("matswipemaincon").style.display = "none";
 document.getElementById("loader").style.display = "block";
 document.getElementById("loader_text").style.display = "block";
+document.getElementById("show_nomorecards").style.display = "none";
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
 import { getDatabase, ref, set, onValue, child, get, push, update } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
@@ -251,10 +252,17 @@ function getMatretterListeFromDB() {
 getMatretterListeFromDB()
 await new Promise(r => setTimeout(r, 500));
 
+if (obj.matretter != null) {
+    var matretterListe = obj.matretter.filter(matrett => {
+        return matrett.tags.some(tag => filter.includes(tag))
+    })
+} else if (obj.matretter == null) {
+    document.getElementById('show_nomorecards').style.display = 'block'
+    document.getElementById('hide_nomorecards').style.display = 'none'
+}
 
-var matretterListe = obj.matretter.filter(matrett => {
-    return matrett.tags.some(tag => filter.includes(tag))
-})
+
+
 
 document.getElementById('filter').addEventListener('click', () => {
     popup.style.display = "flex";
@@ -323,28 +331,20 @@ function nextCardInit(index) {
 }
 
 function nextMatrett(index) {
-    if (index < matretterListe.length - 1) {
-        currentCardInit(index)
-        nextCardInit(index)
-    } else if (index < matretterListe.length) {
-        currentCardInit(index)
-        document.getElementById('next_card').style.display = 'none'
+    if (matretterListe != null) {
+        if (index < matretterListe.length - 1) {
+            currentCardInit(index)
+            nextCardInit(index)
+        } else if (index < matretterListe.length) {
+            currentCardInit(index)
+            document.getElementById('next_card').style.display = 'none'
+        }
+        if (index == matretterListe.length) {
+            document.getElementById('current_card').style.display = 'none'
+            document.getElementById('hide_nomorecards').style.display = 'none'
+            document.getElementById('show_nomorecards').style.display = 'block'
+        }
     }
-    if (index == matretterListe.length) {
-        document.getElementById('current_card').style.display = 'none'
-        alert("Ingen fler matretter ble funnet med dine filtre!")
-        const writeFilterReset = async() => {
-            try {
-                await set(ref(db, 'filter/' + uid), ["default"]);
-                location.reload()
-            } catch (ex) {
-                console.error(`Error while setting data: ${ex.message}`);
-            }
-        };
-        writeFilterReset();
-        location.reload()
-    }
-
 }
 nextMatrett(0)
 
@@ -440,25 +440,27 @@ onValue(ref(db, 'users/' + uid + '/disliked'), (snapshot) => {
 });
 
 function removeDataFromDB(data) {
-    matretterListe.forEach((matrett) => {
-        if (data == null) {
-            return
-        } else {
-            data.forEach((data) => {
-                if (data.id == matrett.id) {
-                    const removeFromList = async() => {
-                        try {
-                            await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
-                        } catch (ex) {
-                            console.error(`Error while setting data: ${ex.message}`);
-                        }
-                    };
-                    removeFromList();
-                }
-            })
-        }
+    if (matretterListe != null) {
+        matretterListe.forEach((matrett) => {
+            if (data == null) {
+                return
+            } else {
+                data.forEach((data) => {
+                    if (data.id == matrett.id) {
+                        const removeFromList = async() => {
+                            try {
+                                await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                            } catch (ex) {
+                                console.error(`Error while setting data: ${ex.message}`);
+                            }
+                        };
+                        removeFromList();
+                    }
+                })
+            }
 
-    })
+        })
+    }
 }
 
 

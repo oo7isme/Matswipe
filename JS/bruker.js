@@ -55,3 +55,7 @@ document.addEventListener('mouseup', function(e) {
         popup.style.display = 'none';
     }
 });
+
+document.getElementById('back').addEventListener('click', () => {
+    window.history.back()
+})

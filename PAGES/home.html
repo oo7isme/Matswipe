@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="../mobileapp/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="../mobileapp/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../mobileapp/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="../mobileapp/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../mobileapp/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../mobileapp/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="../mobileapp/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../mobileapp/favicon-16x16.png">
@@ -32,7 +32,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="MatSwipe">
-    
+
 </head>
 
 <body>
@@ -66,7 +66,7 @@
             </div>
 
             <!-- Version number update with 0.1 per small update and 1.0 per big update -->
-            <p class="version-number">v2.8</p>
+            <p class="version-number">v2.9</p>
 
             <div class="logo">
                 <img src="../IMG/matswipetrans.png" alt="MatSwipe">
@@ -136,7 +136,7 @@
 
 
         <!-- MAIN CARDS -->
-        <div class="matswipe--cards">
+        <div class="matswipe--cards" id="hide_nomorecards">
             <div id="next_card" class="matswipe--card">
                 <img id="next_pic">
                 <h3 id="next_title"></h3>
@@ -149,7 +149,10 @@
                 <p id="current_desc"></p>
             </div>
         </div>
-
+        <div id="show_nomorecards">
+            <p id="nomorecards_title">Det er ingen fler tilgjenglige matretter!</p>
+            <p id="nomorecards_desc">Fjern filteret og prøv igjen eller vent til vi legger flere til i appen.</p>
+        </div>
 
 
 

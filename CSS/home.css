@@ -42,12 +42,31 @@ body {
     color: grey;
 }
 
+#show_nomorecards {
+    text-align: center;
+    font-size: 1.5rem;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 55%;
+    margin-bottom: 75%;
+}
+
+#nomorecards_title {
+    font-size: 1.75rem;
+    color: grey;
+}
+
+#nomorecards_desc {
+    font-size: 1rem;
+    color: grey;
+}
+
 
 /* HEADER */
 
 .version-number {
     color: grey;
-    position: fixed;
+    position: absolute;
     margin-left: 20%;
     margin-top: 4%;
 }
