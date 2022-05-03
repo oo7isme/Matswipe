@@ -257,9 +257,18 @@ getMatretterListeFromDB()
 await new Promise(r => setTimeout(r, 500));
 
 if (obj.matretter != null) {
-    var matretterListe = obj.matretter.filter(matrett => {
-        return matrett.tags.some(tag => filter.includes(tag))
-    })
+    if (typeof(obj.matretter) == 'object') {
+        var matretterListe = Object.entries(obj.matretter).filter(matrett => {
+                console.log(matrett)
+                return matrett.tags.some(tag => filter.includes(tag))
+            })
+            // WORK HERE
+    } else {
+        var matretterListe = obj.matretter.filter(matrett => {
+            return matrett.tags.some(tag => filter.includes(tag))
+        })
+    }
+
 } else if (obj.matretter == null) {
     document.getElementById('show_nomorecards').style.display = 'block'
     document.getElementById('hide_nomorecards').style.display = 'none'
@@ -439,18 +448,34 @@ onValue(ref(db, 'users/' + uid + '/liked'), (snapshot) => {
             if (data == null) {
                 return
             } else {
-                data.forEach((data) => {
-                    if (data.id == matrett.id) {
-                        const removeFromList = async() => {
-                            try {
-                                await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
-                            } catch (ex) {
-                                console.error(`Error while setting data: ${ex.message}`);
-                            }
-                        };
-                        removeFromList();
-                    }
-                })
+                if (typeof(data) == 'object') {
+                    Object.entries(data).forEach((data) => {
+                        if (data.id == matrett.id) {
+                            const removeFromList = async() => {
+                                try {
+                                    await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                                } catch (ex) {
+                                    console.error(`Error while setting data: ${ex.message}`);
+                                }
+                            };
+                            removeFromList();
+                        }
+                    })
+                } else {
+                    data.forEach((data) => {
+                        if (data.id == matrett.id) {
+                            const removeFromList = async() => {
+                                try {
+                                    await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                                } catch (ex) {
+                                    console.error(`Error while setting data: ${ex.message}`);
+                                }
+                            };
+                            removeFromList();
+                        }
+                    })
+                }
+
             }
 
         })
@@ -465,18 +490,34 @@ onValue(ref(db, 'users/' + uid + '/disliked'), (snapshot) => {
             if (data == null) {
                 return
             } else {
-                data.forEach((data) => {
-                    if (data.id == matrett.id) {
-                        const removeFromList = async() => {
-                            try {
-                                await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
-                            } catch (ex) {
-                                console.error(`Error while setting data: ${ex.message}`);
-                            }
-                        };
-                        removeFromList();
-                    }
-                })
+                if (typeof(data) == 'object') {
+                    Object.entries(data).forEach((data) => {
+                        if (data.id == matrett.id) {
+                            const removeFromList = async() => {
+                                try {
+                                    await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                                } catch (ex) {
+                                    console.error(`Error while setting data: ${ex.message}`);
+                                }
+                            };
+                            removeFromList();
+                        }
+                    })
+                } else {
+                    data.forEach((data) => {
+                        if (data.id == matrett.id) {
+                            const removeFromList = async() => {
+                                try {
+                                    await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                                } catch (ex) {
+                                    console.error(`Error while setting data: ${ex.message}`);
+                                }
+                            };
+                            removeFromList();
+                        }
+                    })
+                }
+
             }
 
         })
