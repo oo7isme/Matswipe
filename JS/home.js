@@ -4,7 +4,7 @@ document.getElementById("loader_text").style.display = "block";
 document.getElementById("show_nomorecards").style.display = "none";
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-auth.js';
-import { getDatabase, ref, set, onValue, child, get, push, update } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
+import { getDatabase, ref, set, onValue, child, get, push, update, remove } from 'https://www.gstatic.com/firebasejs/9.6.6/firebase-database.js';
 var firebaseConfig = {
     apiKey: "AIzaSyB30z4Haw-Nx2wRGoT88Iq7uVCpdZ0GGj4",
     authDomain: "matswipe-30b10.firebaseapp.com",
@@ -148,6 +148,8 @@ const dbRef = ref(getDatabase());
 var filter = get(child(dbRef, "filter/" + uid)).then((snapshot) => {
     if (snapshot.exists()) {
         filter = snapshot.val();
+        console.log("Extracted data: ")
+        console.log(filter)
     } else {
         const writeFilterInit = async() => {
             try {
@@ -204,28 +206,28 @@ tags.forEach(item => {
 // Matretter
 let matretter = {
     "matretter": [
-        { "id": "0", "title": "Taco", "desc": "Taco som vi kjenner den! Oppskrift på klassisk norsk taco – fersk og hjemmelaget. Taco er en tradisjonell meksikansk rett som nordmenn har tatt til sitt hjerte og gjort litt sin egen. Fredagen er ofte ikke den samme uten fredagstaco.", "pic": "https://previews.123rf.com/images/gdolgikh/gdolgikh1703/gdolgikh170300221/74432760-%E7%89%9B%E8%82%89%E3%81%AE%E3%82%BF%E3%82%B3%E3%82%B9.jpg", "tags": ["default", "kjøttdeig", "tomat", "løk", "ost", "agurk", "mais"] },
-        { "id": "1", "title": "Pasta Bolognese", "desc": "Pasta bolognese er nok en av verdens mest populære retter, og den skal inneholde storfekjøtt i små biter, pancetta som er en type bacon, løk, gulrøtter, selleri, tomat, kjøttkraft, vin og eventuelt melk. ", "pic": "https://coop.no/globalassets/coop-extra/mat--trender/rask-pasta-bolognese-1200-720.gif?preset=Large", "tags": ["default", "tomat", "kjøttdeig", "løk", "hvitløk", "stangselleri"] },
-        { "id": "2", "title": "Bruschetta", "desc": "Bruschetta er en matrett fra Italia. Den består av grillede eller stekte biter av brød eller baguett med hvitløk og olivenolje påsmurt og med saltdryss.", "pic": "https://pagen.no/globalassets/recept/bruchetta.jpg?w=734&h=462&mode=crop&resized=true", "tags": ["default", "brød", "tomat", "basilikum", "hvitløk"] },
-        { "id": "3", "title": "Tomatsuppe med kokt egg", "desc": "Tomatsuppe er en suppe laget av tomater. Den serveres både varm og kald, og er ofte brukt som ingrediens i mer avanserte retter. Det er også vanlig å tilsette makaroni eller egg.", "pic": "https://husglede.no/wp-content/uploads/2020/08/TOmatsuppe-hovedbilde.jpg", "tags": ["default", "egg", "løk", "hvitløk", "tomat"] },
-        { "id": "4", "title": "Salat", "desc": "Salat er en kald, eller lun matrett som inneholder en blanding oppskårne eller strimlete ingredienser. Ingrediensene er ofte rå, og kan omfatte bladgrønnsaker som salat, spinat eller lignende vekster, ulike grønnsaker, frukt, nøtter, kjøtt og sjømat.", "pic": "https://www.aperitif.no/storage/image/core_files/2015/3/2/de4912925c946321bb7d45d2431833fc/jpg/aperitif/article_details_medium/original.jpg", "tags": ["default", "kjøttdeig", "tomat"] },
-        { "id": "5", "title": "Chili con carne", "desc": "Varmende rett med mange gode smaker. Chili con carne er nydelig hverdagsmat som metter og er enkelt å lage. Både kjøttdeig og karbonadedeig kan brukes, og du kan justere mengden chili etter smak. Server gjerne med tortillachips, ris og koriander.", "pic": "https://www.rema.no/remacommerceapi/v2/rema/media/convert/remaProductCatalog/Online/REC-202216?w=1280&q=75", "tags": ["default", "kjøttdeig", "løk", "hvitløk", "chili", "tomat", "paprika"] },
-        { "id": "6", "title": "Burritos med kyllingkjøttdeig", "desc": "Burrito er en tradisjonell matrett fra Mexico som består av en tortilla som er brettet rundt et fyll. I denne oppskriften har vi valgt å bruke kjøttdeig, men du kan også bruke karbonadedeig eller kyllingkjøttdeig for en sunnere variant.", "pic": "https://images.matprat.no/yt7qajmf28-jumbotron/large", "tags": ["default", "kylling", "løk", "spinat", "tortilla", "tacosaus"] },
-        { "id": "7", "title": "Kjøttkaker med kålstuing", "desc": "Kjøttkaker til middag er god tradisjonsmat. Her servert med kokte poteter, kålstuing og tyttebær. Ta frem foodprosessoren og lag dette knallgode måltidet! ", "pic": "https://images.matprat.no/lgdtvrdd4e-related/mobile", "tags": ["default", "kjøttdeig", "hodekål", "melk", "potet", "mel"] },
-        { "id": "8", "title": "Lasagne", "desc": "Nordmenn har mange favoritter fra det italienske kjøkken, deriblant hjemmelaget lasagne. Ovnsretten består av kjøttsaus og ostesaus som legges lagvis med pastaplater.", "pic": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_1600/x2dvimzvyhbtsbocic3i/hjemmelaget-lasagne", "tags": ["default", "kjøttdeig", "løk", "hvitløk", "tomat", "basilikum", "smør", "mel", "melk", "ost"] },
-        { "id": "9", "title": "Ostesmørbrød", "desc": "Av det kjedelige, gamle brødet kan du trylle fram de mest fantastiske ostesmørbrød. ta en razzia i kjøleskapet og la hver enkelt sette sammen sine favoritter! Vi har laget våre ostesmørbrød vegetariske, men her kan du ta i bruk det aller meste.", "pic": "https://images.matprat.no/t3tm5eqde7-jumbotron/large", "tags": ["default", "løk", "brød", "paprika", "ost", "ketchup"] },
-        { "id": "10", "title": "Toast med stekt egg", "desc": "Hva er bedre enn en digg toast med ost og skinke? Jo, en ost- og skinketoast toppet med et deilig speilegg. Rask og enkel kosemat!", "pic": "https://images.matprat.no/l7eatl6nr5-jumbotron/large", "tags": ["default", "ost", "egg", "brød", "smør"] },
-        { "id": "11", "title": "Avokadotoast med sennep og egg", "desc": "Smør skivene med dijonsennep og legg på salatblader. Del avokado og ta ut steinen. Ta innmaten ut av skallet med en skje og skjær det i skiver. Gi dem en liten dytt så de legger seg i en pen vifteform og legg dem på brødskivene.", "pic": "https://images.matprat.no/jbylk73bfb-jumbotron/large", "tags": ["default", "egg", "avokado", "brød", "ruccula"] },
-        { "id": "12", "title": "Toast med ruccula og granateple", "desc": "Disse digge mini-toastene er fylt med  smeltet ost, sennep, granateple og ruccula. Perfekt til å nyte som en liten koserett, eller servere som en liten forrett i et enkelt vennelag.", "pic": "https://images.matprat.no/3fkaqvdp6r-jumbotron/large", "tags": ["default", "ost", "baguette", "ruccula", "smør"] },
-        { "id": "13", "title": "Toast med lam og glasert løk", "desc": "Varm toast med smeltet ost kan varieres på utallige deilige måter! Denne toasten har vi fylt med glasert rødløk, chévre og lammekjøtt. Her kan du bruke ferdig tilberedt lammeskank fra butikken for den raske varianten.", "pic": "https://images.matprat.no/2v4eznnfvm-jumbotron/large", "tags": ["default", "brød", "lam", "ost", "løk"] },
-        { "id": "14", "title": "Grønnkålsalat med crispy nakkekoteletter", "desc": "Grønnkål er en fantastisk grønnsak som kan brukes året rundt. Bruk den i en deilig råkostsalat sammen med tynne skiver av fennikel og en kremet dressing. Perfekt følge til crispy nakkekoteletter!", "pic": "https://images.matprat.no/flt4mpnzgc-jumbotron/large", "tags": ["default", "egg", "nakkekotletter", "grønnkål", "mel", "olje", "sitron"] },
-        { "id": "15", "title": "Egg i pesto", "desc": "Prøve deg på en av rettene som har gått viralt på TikTok? Her har du oppskriften på pesto egg som den også kalles - enkelt og smakfullt!", "pic": "https://images.matprat.no/5jxpt3e6jt-jumbotron/large", "tags": ["default", "egg", "spinat", "brød"] },
-        { "id": "16", "title": "Smoothiebowl med mango", "desc": "En deilig og frisk mangosmoothie med kokos! Ha smoothien i en bowl, og topp med frisk frukt - en lekker, og fargerik avkjøling i sommervarmen.", "pic": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/06/mango-smoothie-bowl-1.jpg", "tags": ["default", "egg", "banan", "mango"] },
-        { "id": "17", "title": "Eggsandwich", "desc": "En skikkelig digg eggsandwich! Denne sandwichen kalles også eggslut - kanskje ikke det det mest innbydende navnet på en rett, men navnet har den fått fra restauranten i USA som lanserte den. Retten smaker iallefall digg! Saftig eggerøre, sprøtt bacon og smeltet ost -  pakket sammen i en myk brioche. Nam!", "pic": "https://images.matprat.no/ae7l3vsbps-jumbotron/large", "tags": ["default", "egg", "brød", "ost", "bacon", "margarin"] },
-        { "id": "18", "title": "Bønnegryte med tomat", "desc": "Denne deilige bønnegryten har røtter i Hellas, der den gjerne bakes over åpen ild i flere timer. Vi har forenklet retten litt, men fortsatt er det viktig at bønnene får nok tid over varmen, så de blir møre og trekker til seg de gode smakene fra tomat, rosmarin og hvitløk", "pic": "https://images.matprat.no/73x8ft7bpd-jumbotron/large", "tags": ["default", "tomat", "bønner", "løk", "hviløk"] },
-        { "id": "19", "title": "Speilegg med bakt tomat", "desc": "Speilegg er enkel hverdagslykke. Sleng på noen bakte tomater for litt ekstra farge, som er til å bli ekstra glad av! ", "pic": "https://images.matprat.no/xu88t5jb2j-jumbotron/large", "tags": ["default", "egg", "tomat", "brød", "olje"] },
-        { "id": "20", "title": "Tomat og mozzarellasalat på glass", "desc": "En salat med friske tomater og fersk mozzarella er aldri feil! Spis tomat- og mozzarellasalaten som et lite mellommåltid, til lunsj eller server den som forrett til dine gjester. ", "pic": "https://images.matprat.no/tc47e5v5z2-jumbotron/large", "tags": ["default", "tomat", "basilikum", "olje"] },
-        { "id": "21", "title": "Kyllinggryte med kikerter, tomat og spinat", "desc": "Prøv denne superraske og enkle kyllinggryten med kikerter, hermetiske tomater og spinat. Dette er kjempegod og sunn hverdagskost!", "pic": "https://images.matprat.no/50d06d880d2f835f56001403-jumbotron/large", "tags": ["default", "kylling", "spinat", "løk", "chili", "olje", ] }
+        { "id": "0", "title": "Taco", "desc": "Taco som vi kjenner den! Oppskrift på klassisk norsk taco – fersk og hjemmelaget. Taco er en tradisjonell meksikansk rett som nordmenn har tatt til sitt hjerte og gjort litt sin egen. Fredagen er ofte ikke den samme uten fredagstaco.", "pic": "https://previews.123rf.com/images/gdolgikh/gdolgikh1703/gdolgikh170300221/74432760-%E7%89%9B%E8%82%89%E3%81%AE%E3%82%BF%E3%82%B3%E3%82%B9.jpg", "url": "https://www.matprat.no/oppskrifter/familien/taco/", "tags": ["default", "kjøttdeig", "tomat", "løk", "ost", "agurk", "mais"] },
+        { "id": "1", "title": "Pasta Bolognese", "desc": "Pasta bolognese er nok en av verdens mest populære retter, og den skal inneholde storfekjøtt i små biter, pancetta som er en type bacon, løk, gulrøtter, selleri, tomat, kjøttkraft, vin og eventuelt melk. ", "pic": "https://coop.no/globalassets/coop-extra/mat--trender/rask-pasta-bolognese-1200-720.gif?preset=Large", "url": "https://www.matprat.no/oppskrifter/gjester/pasta-bolognese/?gclid=Cj0KCQjwpcOTBhCZARIsAEAYLuWbjBqlc1_Da7QGiWFD_rEZVa1-TkZucW5q_a1-hJuAg-OtxBxH2VgaAjbgEALw_wcB&gclsrc=aw.ds", "tags": ["default", "tomat", "kjøttdeig", "løk", "hvitløk", "stangselleri"] },
+        { "id": "2", "title": "Bruschetta", "desc": "Bruschetta er en matrett fra Italia. Den består av grillede eller stekte biter av brød eller baguett med hvitløk og olivenolje påsmurt og med saltdryss.", "pic": "https://pagen.no/globalassets/recept/bruchetta.jpg?w=734&h=462&mode=crop&resized=true", "url": "https://www.matprat.no/oppskrifter/gjester/bruschetta/?gclid=Cj0KCQjwpcOTBhCZARIsAEAYLuWMJXawbSY7mDcPJrrP820ye4iyps6FAQMML2xnDP0SNuwZOMJPHQ8aAiUxEALw_wcB&gclsrc=aw.ds", "tags": ["default", "brød", "tomat", "basilikum", "hvitløk"] },
+        { "id": "3", "title": "Tomatsuppe med kokt egg", "desc": "Tomatsuppe er en suppe laget av tomater. Den serveres både varm og kald, og er ofte brukt som ingrediens i mer avanserte retter. Det er også vanlig å tilsette makaroni eller egg.", "pic": "https://husglede.no/wp-content/uploads/2020/08/TOmatsuppe-hovedbilde.jpg", "url": "https://www.matprat.no/oppskrifter/familien/tomatsuppe-med-kokt-egg/", "tags": ["default", "egg", "løk", "hvitløk", "tomat"] },
+        { "id": "4", "title": "Salat", "desc": "Salat er en kald, eller lun matrett som inneholder en blanding oppskårne eller strimlete ingredienser. Ingrediensene er ofte rå, og kan omfatte bladgrønnsaker som salat, spinat eller lignende vekster, ulike grønnsaker, frukt, nøtter, kjøtt og sjømat.", "pic": "https://www.aperitif.no/storage/image/core_files/2015/3/2/de4912925c946321bb7d45d2431833fc/jpg/aperitif/article_details_medium/original.jpg", "url": "https://www.matprat.no/oppskrifter/gjester/casarsalat/", "tags": ["default", "kylling", "brød", "tomat"] },
+        { "id": "5", "title": "Chili con carne", "desc": "Varmende rett med mange gode smaker. Chili con carne er nydelig hverdagsmat som metter og er enkelt å lage. Både kjøttdeig og karbonadedeig kan brukes, og du kan justere mengden chili etter smak. Server gjerne med tortillachips, ris og koriander.", "pic": "https://www.rema.no/remacommerceapi/v2/rema/media/convert/remaProductCatalog/Online/REC-202216?w=1280&q=75", "url": "https://www.matprat.no/oppskrifter/rask/chili-con-carne/?gclid=Cj0KCQjwpcOTBhCZARIsAEAYLuV6mI8wbvFqunV7M6WwfYnJR0kopBc7ptPopCPPKrdkElBXk8cSjFMaAvzwEALw_wcB&gclsrc=aw.ds", "tags": ["default", "kjøttdeig", "løk", "hvitløk", "chili", "tomat", "paprika"] },
+        { "id": "6", "title": "Burritos med kyllingkjøttdeig", "desc": "Burrito er en tradisjonell matrett fra Mexico som består av en tortilla som er brettet rundt et fyll. I denne oppskriften har vi valgt å bruke kjøttdeig, men du kan også bruke karbonadedeig eller kyllingkjøttdeig for en sunnere variant.", "pic": "https://images.matprat.no/yt7qajmf28-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/kos/burritos-med-kyllingkjottdeig/", "tags": ["default", "kylling", "løk", "spinat", "tortilla", "tacosaus"] },
+        { "id": "7", "title": "Kjøttkaker med kålstuing", "desc": "Kjøttkaker til middag er god tradisjonsmat. Her servert med kokte poteter, kålstuing og tyttebær. Ta frem foodprosessoren og lag dette knallgode måltidet! ", "pic": "https://images.matprat.no/lgdtvrdd4e-related/mobile", "url": "https://www.matprat.no/oppskrifter/tradisjon/kjottkaker/", "tags": ["default", "kjøttdeig", "hodekål", "melk", "potet", "mel"] },
+        { "id": "8", "title": "Lasagne", "desc": "Nordmenn har mange favoritter fra det italienske kjøkken, deriblant hjemmelaget lasagne. Ovnsretten består av kjøttsaus og ostesaus som legges lagvis med pastaplater.", "pic": "https://res.cloudinary.com/norgesgruppen/images/c_scale,dpr_auto,f_auto,q_auto:eco,w_1600/x2dvimzvyhbtsbocic3i/hjemmelaget-lasagne", "url": "https://www.matprat.no/oppskrifter/familien/lasagne/", "tags": ["default", "kjøttdeig", "løk", "hvitløk", "tomat", "basilikum", "smør", "mel", "melk", "ost"] },
+        { "id": "9", "title": "Ostesmørbrød", "desc": "Av det kjedelige, gamle brødet kan du trylle fram de mest fantastiske ostesmørbrød. ta en razzia i kjøleskapet og la hver enkelt sette sammen sine favoritter! Vi har laget våre ostesmørbrød vegetariske, men her kan du ta i bruk det aller meste.", "pic": "https://images.matprat.no/t3tm5eqde7-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/rask/varme-ostesmorbrod/", "tags": ["default", "løk", "brød", "paprika", "ost", "ketchup"] },
+        { "id": "10", "title": "Toast med stekt egg", "desc": "Hva er bedre enn en digg toast med ost og skinke? Jo, en ost- og skinketoast toppet med et deilig speilegg. Rask og enkel kosemat!", "pic": "https://images.matprat.no/l7eatl6nr5-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/rask/toast-med-stekt-egg/", "tags": ["default", "ost", "egg", "brød", "smør"] },
+        { "id": "11", "title": "Avokadotoast med sennep og egg", "desc": "Smør skivene med dijonsennep og legg på salatblader. Del avokado og ta ut steinen. Ta innmaten ut av skallet med en skje og skjær det i skiver. Gi dem en liten dytt så de legger seg i en pen vifteform og legg dem på brødskivene.", "url": "https://www.matprat.no/oppskrifter/kos/avokadotoast-med-sennep-og-egg/#:~:text=Sm%C3%B8r%20skivene%20med%20dijonsennep%20og,og%20legg%20dem%20p%C3%A5%20br%C3%B8dskivene.", "pic": "https://images.matprat.no/jbylk73bfb-jumbotron/large", "url": "", "tags": ["default", "egg", "avokado", "brød", "ruccula"] },
+        { "id": "12", "title": "Toast med ruccula og granateple", "desc": "Disse digge mini-toastene er fylt med  smeltet ost, sennep, granateple og ruccula. Perfekt til å nyte som en liten koserett, eller servere som en liten forrett i et enkelt vennelag.", "pic": "https://images.matprat.no/3fkaqvdp6r-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/rask/toast-med-ruccula-og-granateple/", "tags": ["default", "ost", "baguette", "ruccula", "smør"] },
+        { "id": "13", "title": "Toast med lam og glasert løk", "desc": "Varm toast med smeltet ost kan varieres på utallige deilige måter! Denne toasten har vi fylt med glasert rødløk, chévre og lammekjøtt. Her kan du bruke ferdig tilberedt lammeskank fra butikken for den raske varianten.", "pic": "https://images.matprat.no/2v4eznnfvm-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/rask/toast-med-lam-og-glasert-lok/", "tags": ["default", "brød", "lam", "ost", "løk"] },
+        { "id": "14", "title": "Grønnkålsalat med crispy nakkekoteletter", "desc": "Grønnkål er en fantastisk grønnsak som kan brukes året rundt. Bruk den i en deilig råkostsalat sammen med tynne skiver av fennikel og en kremet dressing. Perfekt følge til crispy nakkekoteletter!", "pic": "https://images.matprat.no/flt4mpnzgc-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/kos/gronnkalsalat-med-crispy-nakkekoteletter/", "tags": ["default", "egg", "nakkekotletter", "grønnkål", "mel", "olje", "sitron"] },
+        { "id": "15", "title": "Egg i pesto", "desc": "Prøve deg på en av rettene som har gått viralt på TikTok? Her har du oppskriften på pesto egg som den også kalles - enkelt og smakfullt!", "pic": "https://images.matprat.no/5jxpt3e6jt-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/rask/egg-i-pesto/", "tags": ["default", "egg", "spinat", "brød"] },
+        { "id": "16", "title": "Smoothiebowl med mango", "desc": "En deilig og frisk mangosmoothie med kokos! Ha smoothien i en bowl, og topp med frisk frukt - en lekker, og fargerik avkjøling i sommervarmen.", "pic": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2015/06/mango-smoothie-bowl-1.jpg", "url": "https://www.matprat.no/oppskrifter/sunn/smoothiebowl-med-mango/", "tags": ["default", "egg", "banan", "mango"] },
+        { "id": "17", "title": "Eggsandwich", "desc": "En skikkelig digg eggsandwich! Denne sandwichen kalles også eggslut - kanskje ikke det det mest innbydende navnet på en rett, men navnet har den fått fra restauranten i USA som lanserte den. Retten smaker iallefall digg! Saftig eggerøre, sprøtt bacon og smeltet ost -  pakket sammen i en myk brioche. Nam!", "pic": "https://images.matprat.no/ae7l3vsbps-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/rask/eggsandwich/", "tags": ["default", "egg", "brød", "ost", "bacon", "margarin"] },
+        { "id": "18", "title": "Bønnegryte med tomat", "desc": "Denne deilige bønnegryten har røtter i Hellas, der den gjerne bakes over åpen ild i flere timer. Vi har forenklet retten litt, men fortsatt er det viktig at bønnene får nok tid over varmen, så de blir møre og trekker til seg de gode smakene fra tomat, rosmarin og hvitløk", "pic": "https://images.matprat.no/73x8ft7bpd-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/gjester/bonnegryte-med-tomat/", "tags": ["default", "tomat", "bønner", "løk", "hviløk"] },
+        { "id": "19", "title": "Speilegg med bakt tomat", "desc": "Speilegg er enkel hverdagslykke. Sleng på noen bakte tomater for litt ekstra farge, som er til å bli ekstra glad av! ", "pic": "https://images.matprat.no/xu88t5jb2j-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/sunn/speilegg-med-bakt-tomat/", "tags": ["default", "egg", "tomat", "brød", "olje"] },
+        { "id": "20", "title": "Tomat og mozzarellasalat på glass", "desc": "En salat med friske tomater og fersk mozzarella er aldri feil! Spis tomat- og mozzarellasalaten som et lite mellommåltid, til lunsj eller server den som forrett til dine gjester. ", "pic": "https://images.matprat.no/tc47e5v5z2-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/kos/tomat--og-mozzarellasalat-pa-glass/", "tags": ["default", "tomat", "basilikum", "olje"] },
+        { "id": "21", "title": "Kyllinggryte med kikerter, tomat og spinat", "desc": "Prøv denne superraske og enkle kyllinggryten med kikerter, hermetiske tomater og spinat. Dette er kjempegod og sunn hverdagskost!", "pic": "https://images.matprat.no/50d06d880d2f835f56001403-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/sunn/kyllinggryte-med-kikerter-tomat-og-spinat/", "tags": ["default", "kylling", "spinat", "løk", "chili", "olje", ] }
     ]
 };
 var obj;
@@ -234,6 +236,8 @@ function getMatretterListeFromDB() {
     get(child(dbRef, "users/" + uid)).then((snapshot) => {
         if (snapshot.exists()) {
             obj = snapshot.val();
+            console.log("Extracted data: ")
+            console.log(obj)
         } else {
             const writeListeData = async() => {
                 try {
@@ -354,18 +358,14 @@ function delay(time) {
 
 function saveLikedFood() {
     const db = getDatabase();
-    const postData = matretterListe[index - 1]
-    const updates = {};
-    updates['users/' + uid + '/liked/' + postData.id] = postData;
-    return update(ref(db), updates);
+    const matrettData = matretterListe[index - 1]
+    set(ref(db, 'users/' + uid + "/liked/" + matrettData.id), matrettData);
 }
 
 function saveDislikedFood() {
     const db = getDatabase();
-    const postData = matretterListe[index - 1]
-    const updates = {};
-    updates['users/' + uid + '/disliked/' + postData.id] = postData;
-    return update(ref(db), updates);
+    const matrettData = matretterListe[index - 1]
+    set(ref(db, 'users/' + uid + "/disliked/" + matrettData.id), matrettData);
 }
 
 
@@ -432,14 +432,8 @@ async function btndisliked(index) {
 
 onValue(ref(db, 'users/' + uid + '/liked'), (snapshot) => {
     const data = snapshot.val();
-    removeDataFromDB(data)
-});
-onValue(ref(db, 'users/' + uid + '/disliked'), (snapshot) => {
-    const data = snapshot.val();
-    removeDataFromDB(data)
-});
-
-function removeDataFromDB(data) {
+    console.log("Extracted data: ")
+    console.log(data)
     if (matretterListe != null) {
         matretterListe.forEach((matrett) => {
             if (data == null) {
@@ -461,7 +455,33 @@ function removeDataFromDB(data) {
 
         })
     }
-}
+});
+onValue(ref(db, 'users/' + uid + '/disliked'), (snapshot) => {
+    const data = snapshot.val();
+    console.log("Extracted data: ")
+    console.log(data)
+    if (matretterListe != null) {
+        matretterListe.forEach((matrett) => {
+            if (data == null) {
+                return
+            } else {
+                data.forEach((data) => {
+                    if (data.id == matrett.id) {
+                        const removeFromList = async() => {
+                            try {
+                                await set(ref(db, 'users/' + uid + "/matretter/" + data.id), null);
+                            } catch (ex) {
+                                console.error(`Error while setting data: ${ex.message}`);
+                            }
+                        };
+                        removeFromList();
+                    }
+                })
+            }
+
+        })
+    }
+});
 
 
 

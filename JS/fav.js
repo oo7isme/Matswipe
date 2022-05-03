@@ -34,6 +34,7 @@ onAuthStateChanged(auth, function(user) {
     }
 })
 document.getElementById('likedlistnull').style.display = 'none'
+document.getElementById('closeiframe').style.display = 'none'
 
 await new Promise(r => setTimeout(r, 1000));
 
@@ -91,10 +92,37 @@ if (likedList != null) {
         tag3.textContent = liked.tags[3]
         document.getElementById(tagsdiv.id).appendChild(tag3)
 
+        var iframe = document.createElement('iframe')
+        iframe.className = 'iframe'
+        iframe.id = 'iframe' + liked.id
+        iframe.src = liked.url
+        document.getElementById('matswipe').appendChild(iframe)
+        iframe.style.display = 'none'
+
+
+        document.getElementById(matrett.id).addEventListener('click', () => {
+            iframe.style.display = 'block'
+            document.getElementById('listofmatretterlongname').style.display = 'none'
+            document.getElementById('searchbox').style.display = 'none'
+            document.getElementById('closeiframe').style.display = 'inline-block'
+            document.getElementById('back').style.display = 'none'
+        })
+
+        document.getElementById('closeiframe').addEventListener('click', () => {
+            document.getElementById('iframe' + liked.id).style.display = 'none'
+            document.getElementById('listofmatretterlongname').style.display = 'flex'
+            document.getElementById('searchbox').style.display = 'block'
+            document.getElementById('closeiframe').style.display = 'none'
+            document.getElementById('back').style.display = 'inline-block'
+        })
+
     })
 } else if (likedList == null) {
     document.getElementById('likedlistnull').style.display = 'block'
 }
+
+
+
 
 
 

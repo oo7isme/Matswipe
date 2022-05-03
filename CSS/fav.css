@@ -55,6 +55,14 @@ body {
     color: grey;
 }
 
+.iframe {
+    margin-top: 1%;
+    width: 98%;
+    height: 100%;
+    border-radius: 12px;
+    border: 0;
+}
+
 .matswipe {
     width: 100vw;
     height: 81vh;
@@ -97,6 +105,10 @@ body {
 }
 
 .fa-arrow-left {
+    color: black;
+}
+
+.fa-xmark {
     color: black;
 }
 
