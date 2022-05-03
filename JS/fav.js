@@ -33,6 +33,7 @@ onAuthStateChanged(auth, function(user) {
         }
     }
 })
+document.getElementById('likedlistnull').style.display = 'none'
 
 await new Promise(r => setTimeout(r, 1000));
 
@@ -48,50 +49,53 @@ get(child(ref(getDatabase()), "users/" + uid + "/liked")).then((snapshot) => {
 });
 await new Promise(r => setTimeout(r, 500));
 
-console.log(likedList);
+if (likedList != null) {
+    likedList.forEach((liked) => {
+        var matrett = document.createElement('div')
+        matrett.className = 'matrett'
+        matrett.id = liked.id
+        document.getElementById("listofmatretterlongname").appendChild(matrett)
 
-likedList.forEach((liked) => {
-    var matrett = document.createElement('div')
-    matrett.className = 'matrett'
-    matrett.id = liked.id
-    document.getElementById("listofmatretterlongname").appendChild(matrett)
+        var img = document.createElement('img')
+        img.src = liked.pic
+        img.className = 'img'
+        document.getElementById(matrett.id).appendChild(img)
 
-    var img = document.createElement('img')
-    img.src = liked.pic
-    img.className = 'img'
-    document.getElementById(matrett.id).appendChild(img)
+        var matrettunder = document.createElement('div')
+        matrettunder.className = 'matrettunder'
+        matrettunder.id = 'matrettunder' + matrett.id
+        document.getElementById(matrett.id).appendChild(matrettunder)
 
-    var matrettunder = document.createElement('div')
-    matrettunder.className = 'matrettunder'
-    matrettunder.id = 'matrettunder' + matrett.id
-    document.getElementById(matrett.id).appendChild(matrettunder)
+        var title = document.createElement('h3')
+        title.innerHTML = liked.title
+        title.className = 'title'
+        document.getElementById(matrettunder.id).appendChild(title)
 
-    var title = document.createElement('h3')
-    title.innerHTML = liked.title
-    title.className = 'title'
-    document.getElementById(matrettunder.id).appendChild(title)
+        var tagsdiv = document.createElement('div')
+        tagsdiv.className = 'tagsdiv'
+        tagsdiv.id = 'tagsdiv' + matrett.id
+        document.getElementById(matrettunder.id).appendChild(tagsdiv)
 
-    var tagsdiv = document.createElement('div')
-    tagsdiv.className = 'tagsdiv'
-    tagsdiv.id = 'tagsdiv' + matrett.id
-    document.getElementById(matrettunder.id).appendChild(tagsdiv)
+        var tag1 = document.createElement('div')
+        tag1.className = 'tag1'
+        tag1.textContent = liked.tags[1]
+        document.getElementById(tagsdiv.id).appendChild(tag1)
 
-    var tag1 = document.createElement('div')
-    tag1.className = 'tag1'
-    tag1.textContent = liked.tags[1]
-    document.getElementById(tagsdiv.id).appendChild(tag1)
+        var tag2 = document.createElement('div')
+        tag2.className = 'tag2'
+        tag2.textContent = liked.tags[2]
+        document.getElementById(tagsdiv.id).appendChild(tag2)
 
-    var tag2 = document.createElement('div')
-    tag2.className = 'tag2'
-    tag2.textContent = liked.tags[2]
-    document.getElementById(tagsdiv.id).appendChild(tag2)
+        var tag3 = document.createElement('div')
+        tag3.className = 'tag3'
+        tag3.textContent = liked.tags[3]
+        document.getElementById(tagsdiv.id).appendChild(tag3)
 
-    var tag3 = document.createElement('div')
-    tag3.className = 'tag3'
-    tag3.textContent = liked.tags[3]
-    document.getElementById(tagsdiv.id).appendChild(tag3)
+    })
+} else if (likedList == null) {
+    document.getElementById('likedlistnull').style.display = 'block'
+}
 
-})
 
 
 

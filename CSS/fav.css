@@ -40,6 +40,21 @@ body {
     color: grey;
 }
 
+#likedlistnull {
+    text-align: center;
+    margin-top: 55%;
+}
+
+#nomorecards_title {
+    font-size: 2rem;
+    color: grey;
+}
+
+#nomorecards_desc {
+    font-size: 1rem;
+    color: grey;
+}
+
 .matswipe {
     width: 100vw;
     height: 81vh;
