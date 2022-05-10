@@ -54,7 +54,7 @@ if (likedList != null) {
     Object.entries(likedList).forEach((liked) => {
         var matrett = document.createElement('div')
         matrett.className = 'matrett'
-        matrett.id = liked[1].id
+        matrett.id = liked[1].title.toLowerCase().replace(/\s/g, '');
         document.getElementById("listofmatretterlongname").appendChild(matrett)
 
         var img = document.createElement('img')
@@ -70,6 +70,7 @@ if (likedList != null) {
         var title = document.createElement('h3')
         title.innerHTML = liked[1].title
         title.className = 'title'
+        title.id = 'title' + liked[1].title.toLowerCase().replace(/\s/g, '');
         document.getElementById(matrettunder.id).appendChild(title)
 
         var tagsdiv = document.createElement('div')
@@ -79,7 +80,6 @@ if (likedList != null) {
 
         var tag1 = document.createElement('div')
         tag1.className = 'tag1'
-        console.log(liked[1].tags[1])
         tag1.textContent = liked[1].tags[1]
         document.getElementById(tagsdiv.id).appendChild(tag1)
 
@@ -122,7 +122,23 @@ if (likedList != null) {
     document.getElementById('likedlistnull').style.display = 'block'
 }
 
+var matretterTitle = [];
+Object.entries(listofmatretterlongname.children).forEach(element => {
+    element = element[1]
+    var title = document.getElementById('title' + element.id).textContent.toLowerCase().replace(/\s/g, '');
+    matretterTitle.push(title)
+});
+document.getElementById('input-search').addEventListener('input', (e) => {
+    const search = e.target.value.toLowerCase().replace(/\s/g, '');
+    matretterTitle.forEach(title => {
+        if (!title.includes(search)) {
+            document.getElementById(title).style.display = 'none'
+        } else {
+            document.getElementById(title).style.display = 'flex'
+        }
+    })
 
+})
 
 
 

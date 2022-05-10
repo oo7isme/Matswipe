@@ -164,7 +164,7 @@ var filter = get(child(dbRef, "filter/" + uid)).then((snapshot) => {
 });
 await new Promise(r => setTimeout(r, 1000));
 var tags = document.querySelectorAll('.tag')
-filter.forEach(filter => {
+Object.entries(filter).forEach(filter => {
     tags.forEach(item => {
         if (filter == item.textContent.toLowerCase()) {
             item.setAttribute('clicked', 'true')
@@ -355,7 +355,6 @@ function delay(time) {
 
 function saveLikedFood() {
     const db = getDatabase();
-    console.log(matretterListe[index - 1][1])
     const matrettData = matretterListe[index - 1][1]
     set(ref(db, 'users/' + uid + "/liked/" + matrettData.id), matrettData);
 }
@@ -374,7 +373,6 @@ async function liked(index) {
     card.style.opacity = '0';
     card.style.transform = 'none';
     var id = document.getElementById('current_title').textContent
-    console.log("Liked " + id)
     saveLikedFood()
     nextMatrett(index)
     card.style.opacity = '1';
@@ -389,7 +387,6 @@ async function disliked(index) {
     card.style.opacity = '0';
     card.style.transform = 'none';
     var id = document.getElementById('current_title').textContent
-    console.log("Disliked " + id)
     saveDislikedFood()
     nextMatrett(index)
     card.style.opacity = '1';
@@ -398,7 +395,6 @@ async function disliked(index) {
 async function btnliked(index) {
     var card = document.getElementById('current_card');
     var id = document.getElementById('current_title').textContent
-    console.log("Liked " + id)
     await delay(300)
     card.style.transition = 'none';
     card.style.opacity = '0';
@@ -414,7 +410,6 @@ async function btnliked(index) {
 async function btndisliked(index) {
     var card = document.getElementById('current_card');
     var id = document.getElementById('current_title').textContent
-    console.log("Disliked " + id)
     await delay(300)
     card.style.transition = 'none';
     card.style.opacity = '0';
