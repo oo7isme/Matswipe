@@ -51,14 +51,14 @@ get(child(ref(getDatabase()), "users/" + uid + "/liked")).then((snapshot) => {
 await new Promise(r => setTimeout(r, 500));
 
 if (likedList != null) {
-    likedList.forEach((liked) => {
+    Object.entries(likedList).forEach((liked) => {
         var matrett = document.createElement('div')
         matrett.className = 'matrett'
-        matrett.id = liked.id
+        matrett.id = liked[1].id
         document.getElementById("listofmatretterlongname").appendChild(matrett)
 
         var img = document.createElement('img')
-        img.src = liked.pic
+        img.src = liked[1].pic
         img.className = 'img'
         document.getElementById(matrett.id).appendChild(img)
 
@@ -68,7 +68,7 @@ if (likedList != null) {
         document.getElementById(matrett.id).appendChild(matrettunder)
 
         var title = document.createElement('h3')
-        title.innerHTML = liked.title
+        title.innerHTML = liked[1].title
         title.className = 'title'
         document.getElementById(matrettunder.id).appendChild(title)
 
@@ -79,23 +79,24 @@ if (likedList != null) {
 
         var tag1 = document.createElement('div')
         tag1.className = 'tag1'
-        tag1.textContent = liked.tags[1]
+        console.log(liked[1].tags[1])
+        tag1.textContent = liked[1].tags[1]
         document.getElementById(tagsdiv.id).appendChild(tag1)
 
         var tag2 = document.createElement('div')
         tag2.className = 'tag2'
-        tag2.textContent = liked.tags[2]
+        tag2.textContent = liked[1].tags[2]
         document.getElementById(tagsdiv.id).appendChild(tag2)
 
         var tag3 = document.createElement('div')
         tag3.className = 'tag3'
-        tag3.textContent = liked.tags[3]
+        tag3.textContent = liked[1].tags[3]
         document.getElementById(tagsdiv.id).appendChild(tag3)
 
         var iframe = document.createElement('iframe')
         iframe.className = 'iframe'
-        iframe.id = 'iframe' + liked.id
-        iframe.src = liked.url
+        iframe.id = 'iframe' + liked[1].id
+        iframe.src = liked[1].url
         document.getElementById('matswipe').appendChild(iframe)
         iframe.style.display = 'none'
 
@@ -109,7 +110,7 @@ if (likedList != null) {
         })
 
         document.getElementById('closeiframe').addEventListener('click', () => {
-            document.getElementById('iframe' + liked.id).style.display = 'none'
+            document.getElementById('iframe' + liked[1].id).style.display = 'none'
             document.getElementById('listofmatretterlongname').style.display = 'flex'
             document.getElementById('searchbox').style.display = 'block'
             document.getElementById('closeiframe').style.display = 'none'
