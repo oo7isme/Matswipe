@@ -267,9 +267,11 @@ if (obj.matretter != null) {
 
 document.getElementById('filter').addEventListener('click', () => {
     popup.style.display = "flex";
+    document.getElementById('close').style.display = "block";
 });
 document.querySelector('#close').addEventListener('click', () => {
     document.getElementById('popup').style.display = 'none';
+    document.getElementById('close').style.display = "none";
 
     const user = auth.currentUser;
     const writeFilterData = async() => {

@@ -8,7 +8,7 @@
 
 #loader {
     margin-left: 40%;
-    margin-top: 100%;
+    margin-top: 80%;
     border: 16px solid #f3f3f3;
     /* Light grey */
     border-top: 16px solid #3498db;
@@ -35,6 +35,7 @@ body {
 }
 
 #headerpic {
+    position: relative;
     margin-top: 20%;
     width: 40%;
 }
@@ -63,7 +64,7 @@ body {
     background: #FFFFFF;
     max-width: 360px;
     margin-top: -100%;
-    padding: 45px;
+    padding: 10%;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
