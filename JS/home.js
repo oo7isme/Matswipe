@@ -166,7 +166,7 @@ await new Promise(r => setTimeout(r, 1000));
 var tags = document.querySelectorAll('.tag')
 Object.entries(filter).forEach(filter => {
     tags.forEach(item => {
-        if (filter == item.textContent.toLowerCase()) {
+        if (filter[1] == item.textContent.toLowerCase()) {
             item.setAttribute('clicked', 'true')
             item.style.background = "#4CAF50";
             item.style.color = "white";
