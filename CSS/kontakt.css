@@ -1,152 +1,171 @@
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    background: #d5f5d5;
-    overflow: hidden;
-    font-family: sans-serif;
+  background: #d5f5d5;
+  overflow: hidden;
+  font-family: sans-serif;
 }
 
 .matswipe {
-    width: 100vw;
-    height: 81vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    opacity: 1;
-    transition: opacity 0.1s ease-in-out;
+  width: 100vw;
+  height: 81vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.1s ease-in-out;
 }
-
+.mobileView {
+  display: none;
+  width: 100vw;
+  color: gray;
+  text-align: center;
+}
+@media only screen and (min-width: 768px) {
+  /* Desktop view */
+  .matswipe {
+    width: 390px;
+    margin-left: 35%;
+  }
+  .mobileView {
+    display: block;
+  }
+}
 .loaded.matswipe {
-    opacity: 1;
+  opacity: 1;
 }
 
 .matswipe--buttons {
-    position: fixed;
-    left: 40%;
-    bottom: 80px;
-    flex: 0 0 100px;
-    text-align: center;
-    padding-top: 20px;
+  position: fixed;
+  left: 40%;
+  bottom: 80px;
+  flex: 0 0 100px;
+  text-align: center;
+  padding-top: 20px;
 }
 
 .matswipe--buttons button {
-    border-radius: 50%;
-    line-height: 60px;
-    width: 60px;
-    border: 0;
-    background: #FFFFFF;
-    display: inline-block;
-    margin: 0 8px;
+  border-radius: 50%;
+  line-height: 60px;
+  width: 60px;
+  border: 0;
+  background: #ffffff;
+  display: inline-block;
+  margin: 0 8px;
 }
 
 .matswipe--buttons button:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .matswipe--buttons i {
-    font-size: 32px;
-    vertical-align: middle;
+  font-size: 32px;
+  vertical-align: middle;
 }
 
 .fa-arrow-left {
-    color: black;
+  color: black;
 }
 
 #popup {
-    display: none;
-    position: fixed;
-    width: 250px;
-    height: 260px;
-    padding: 10%;
-    margin-top: 65%;
-    background-color: #FFFFFF;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    animation: pop-in 0.2s;
+  display: none;
+  position: fixed;
+  width: 250px;
+  height: 260px;
+  padding: 10%;
+  margin-top: 65%;
+  background-color: #ffffff;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  animation: pop-in 0.2s;
 }
 
 .form {
-    width: 90%;
-    height: 70%;
-    padding-top: -15%;
-    margin-top: 25%;
-    background-color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    text-align: center;
+  width: 90%;
+  height: 70%;
+  padding-top: -15%;
+  margin-top: 25%;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  text-align: center;
 }
 
 #kontakt {
-    position: fixed;
-    margin-top: -90%;
-    font-size: 1.5rem;
+  position: fixed;
+  margin-top: -90%;
+  font-size: 1.5rem;
 }
 
 #fornavn {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 #etternavn {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 #melding {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 button {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #4CAF50;
-    width: 90%;
-    border: 0;
-    border-radius: 25px;
-    /* padding: 15px; */
-    color: #FFFFFF;
-    font-size: 1.2rem;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-    cursor: pointer;
-    height: 20%;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4caf50;
+  width: 90%;
+  border: 0;
+  border-radius: 25px;
+  /* padding: 15px; */
+  color: #ffffff;
+  font-size: 1.2rem;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  height: 20%;
 }
 
 .form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    border-radius: 20px;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  border-radius: 20px;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 .form textarea {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    border-radius: 20px;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-    height: 30%;
-    resize: none;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  border-radius: 20px;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  height: 30%;
+  resize: none;
 }
