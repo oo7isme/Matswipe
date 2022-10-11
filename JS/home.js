@@ -19,18 +19,26 @@ const auth = getAuth(app);
 const db = getDatabase();
 
 let uid = '';
-onAuthStateChanged(auth, function(user) {
+var init = false;
+onAuthStateChanged(auth, function (user) {
     if (user) {
         uid = user.uid
+        init = true;
         console.log(uid);
     } else {
         if (window.location != 'index.html') {
+            init = true;
             window.location = "../index.html";
         }
     }
 })
 
-await new Promise(r => setTimeout(r, 1000));
+while (init == false) {
+    if (init == true) {
+        break;
+    }
+    await new Promise(r => setTimeout(r, 100));
+}
 
 // GENERAL USE ELEMENTS
 var matswipeContainer = document.querySelector('.matswipe');
@@ -60,11 +68,11 @@ function incrementIndex() {
 // MAIN SWIPE CODE
 var hammertime = new Hammer(currentCard);
 
-hammertime.on('pan', function(event) {
+hammertime.on('pan', function (event) {
     currentCard.classList.add('moving');
 });
 
-hammertime.on('pan', function(event) {
+hammertime.on('pan', function (event) {
     event.target.style.transition = '';
     if (event.deltaX === 0) return;
     if (event.center.x === 0 && event.center.y === 0) return;
@@ -79,7 +87,7 @@ hammertime.on('pan', function(event) {
     event.target.style.transform = 'translate(' + event.deltaX + 'px, ' + event.deltaY + 'px) rotate(' + rotate + 'deg)';
 });
 
-hammertime.on('panend', function(event) {
+hammertime.on('panend', function (event) {
     event.target.style.transition = 'transition: all 0.3s ease-in-out';
     currentCard.classList.remove('moving');
     matswipeContainer.classList.remove('matswipe_love');
@@ -113,11 +121,11 @@ hammertime.on('panend', function(event) {
 
 // LIKE DISLIKE BUTTONS
 function createButtonListener(love) {
-    return function(event) {
+    return function (event) {
         document.getElementById("love").disabled = true;
         document.getElementById("nope").disabled = true;
-        setTimeout(function() { document.getElementById("love").disabled = false; }, 800);
-        setTimeout(function() { document.getElementById("nope").disabled = false; }, 800);
+        setTimeout(function () { document.getElementById("love").disabled = false; }, 800);
+        setTimeout(function () { document.getElementById("nope").disabled = false; }, 800);
 
         var moveOutWidth = document.body.clientWidth * 1.5;
         var card = document.getElementById('current_card')
@@ -149,7 +157,7 @@ var filter = get(child(dbRef, "filter/" + uid)).then((snapshot) => {
     if (snapshot.exists()) {
         filter = snapshot.val();
     } else {
-        const writeFilterInit = async() => {
+        const writeFilterInit = async () => {
             try {
                 await set(ref(db, 'filter/' + uid), ["default"]);
                 location.reload()
@@ -225,7 +233,7 @@ let matretter = {
         { "id": "18", "title": "Bønnegryte med tomat", "desc": "Denne deilige bønnegryten har røtter i Hellas, der den gjerne bakes over åpen ild i flere timer. Vi har forenklet retten litt, men fortsatt er det viktig at bønnene får nok tid over varmen, så de blir møre og trekker til seg de gode smakene fra tomat, rosmarin og hvitløk", "pic": "https://images.matprat.no/73x8ft7bpd-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/gjester/bonnegryte-med-tomat/", "tags": ["default", "tomat", "bønner", "løk", "hviløk"] },
         { "id": "19", "title": "Speilegg med bakt tomat", "desc": "Speilegg er enkel hverdagslykke. Sleng på noen bakte tomater for litt ekstra farge, som er til å bli ekstra glad av! ", "pic": "https://images.matprat.no/xu88t5jb2j-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/sunn/speilegg-med-bakt-tomat/", "tags": ["default", "egg", "tomat", "brød", "olje"] },
         { "id": "20", "title": "Tomat og mozzarellasalat på glass", "desc": "En salat med friske tomater og fersk mozzarella er aldri feil! Spis tomat- og mozzarellasalaten som et lite mellommåltid, til lunsj eller server den som forrett til dine gjester. ", "pic": "https://images.matprat.no/tc47e5v5z2-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/kos/tomat--og-mozzarellasalat-pa-glass/", "tags": ["default", "tomat", "basilikum", "olje"] },
-        { "id": "21", "title": "Kyllinggryte med kikerter, tomat og spinat", "desc": "Prøv denne superraske og enkle kyllinggryten med kikerter, hermetiske tomater og spinat. Dette er kjempegod og sunn hverdagskost!", "pic": "https://images.matprat.no/50d06d880d2f835f56001403-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/sunn/kyllinggryte-med-kikerter-tomat-og-spinat/", "tags": ["default", "kylling", "spinat", "løk", "chili", "olje", ] }
+        { "id": "21", "title": "Kyllinggryte med kikerter, tomat og spinat", "desc": "Prøv denne superraske og enkle kyllinggryten med kikerter, hermetiske tomater og spinat. Dette er kjempegod og sunn hverdagskost!", "pic": "https://images.matprat.no/50d06d880d2f835f56001403-jumbotron/large", "url": "https://www.matprat.no/oppskrifter/sunn/kyllinggryte-med-kikerter-tomat-og-spinat/", "tags": ["default", "kylling", "spinat", "løk", "chili", "olje",] }
     ]
 };
 var obj;
@@ -235,7 +243,7 @@ function getMatretterListeFromDB() {
         if (snapshot.exists()) {
             obj = snapshot.val();
         } else {
-            const writeListeData = async() => {
+            const writeListeData = async () => {
                 try {
                     await set(ref(db, 'users/' + uid), matretter);
                 } catch (ex) {
@@ -274,7 +282,7 @@ document.querySelector('#close').addEventListener('click', () => {
     document.getElementById('close').style.display = "none";
 
     const user = auth.currentUser;
-    const writeFilterData = async() => {
+    const writeFilterData = async () => {
         try {
             await set(ref(db, 'filter/' + uid), filter);
         } catch (ex) {
@@ -434,7 +442,7 @@ onValue(ref(db, 'users/' + uid + '/liked'), (snapshot) => {
             } else {
                 Object.entries(data).forEach((data) => {
                     if (data[1].id == matrett[1].id) {
-                        const removeFromList = async() => {
+                        const removeFromList = async () => {
                             try {
                                 await set(ref(db, 'users/' + uid + "/matretter/" + data[1].id), null);
                             } catch (ex) {
@@ -457,10 +465,10 @@ onValue(ref(db, 'users/' + uid + '/disliked'), (snapshot) => {
             if (data == null) {
                 return;
             } else {
-                if (typeof(data) == 'object') {
+                if (typeof (data) == 'object') {
                     Object.entries(data).forEach((data) => {
                         if (data[1].id == matrett[1].id) {
-                            const removeFromList = async() => {
+                            const removeFromList = async () => {
                                 try {
                                     await set(ref(db, 'users/' + uid + "/matretter/" + data[1].id), null);
                                 } catch (ex) {

@@ -11,7 +11,7 @@ var firebaseConfig = {
 };
 let app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-onAuthStateChanged(auth, function(user) {
+onAuthStateChanged(auth, function (user) {
     if (user) {
         var email = user.email;
         document.getElementById("epost").innerHTML = email;
@@ -50,7 +50,7 @@ close.addEventListener("click", myFunction);
 function myFunction() {
     document.getElementById("popup").style.display = "none";
 }
-document.addEventListener('mouseup', function(e) {
+document.addEventListener('mouseup', function (e) {
     if (!popup.contains(e.target)) {
         popup.style.display = 'none';
     }

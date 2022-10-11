@@ -23,20 +23,28 @@ document.getElementById("back").addEventListener("click", () => {
 })
 
 let uid = '';
-onAuthStateChanged(auth, function(user) {
+var init = false;
+onAuthStateChanged(auth, function (user) {
     if (user) {
         uid = user.uid
+        init = true;
         console.log(uid);
     } else {
         if (window.location != 'index.html') {
+            init = true;
             window.location = "../index.html";
         }
     }
 })
 document.getElementById('likedlistnull').style.display = 'none'
 document.getElementById('closeiframe').style.display = 'none'
+while (init == false) {
+    if (init == true) {
+        break;
+    }
+    await new Promise(r => setTimeout(r, 100));
+}
 
-await new Promise(r => setTimeout(r, 1000));
 
 var likedList;
 get(child(ref(getDatabase()), "users/" + uid + "/liked")).then((snapshot) => {
